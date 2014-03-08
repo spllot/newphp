@@ -1,0 +1,612 @@
+/*-----------menu-home---------------*/
+
+.menu-home{
+	margin-top:5px;
+}
+
+.menu-home a{
+	margin:0px 0 0 9px;
+}
+
+.menu-home a:hover{
+	background: url(../images/menu-home-over.gif) no-repeat 0 0 !important;
+	display:block;
+}
+
+.menu-home a:hover img{
+	visibility:hidden;
+}
+
+/*---------------main------------------------*/
+#main{
+	margin-top:10px;
+	height:111px;
+}
+
+#main-left{
+	float:left;
+	width:720px;
+	
+}
+
+#main-right{
+	float:right;
+	width:235px;
+}
+
+/*---------------marquee------------------------*/
+
+#wrap-marquee{
+	clear:both;
+	padding:11px 0 12px;
+	position:relative;
+}
+
+#marquee{
+	float:left;
+	border:1px solid #dcdcdc;
+	box-shadow: 0 0 10px  rgba(204,204,204,0.5) inset;
+	width:682px;
+	height:32px;
+	line-height:32px;
+	padding:0 18px;
+	font-size:14px;
+	font-family: Arial,微軟正黑體;
+}
+
+#marquee a{
+	color:#000000;
+	
+}
+
+#marquee a:hover{
+	text-decoration:underline;
+}
+
+/*---------------home-login-sub-----------------------*/
+#home-login{
+	float:right;
+	width:235px;
+}
+
+#home-login li {
+	float:left;
+}
+
+#home-login li a{
+	display:block;
+	height:35px;
+}
+
+
+/*---------------home-login------------------------*/
+.btn-login a{
+	width:114px;
+	height:35px;
+}
+
+.btn-login a:hover{
+	background: url(../images/btn-login-1.gif) no-repeat 0 0;
+	display:block;
+}
+
+.btn-login a:hover img{
+	visibility:hidden;
+}
+
+/*-------login-1------------*/
+.btn-login-1 a{
+	width:114px;
+	height:35px;
+}
+
+.btn-login-1 a:hover{
+	background: url(../images/btn-login-2-1.gif) no-repeat 0 0;
+	display:block;
+}
+
+.btn-login-1 a:hover img{
+	visibility:hidden;
+}
+/*---------------home-member------------------------*/
+.btn-member a{
+	width:121px;
+}
+
+.btn-member a:hover{
+	background: url(../images/btn-member-1.gif) no-repeat 0 0;
+	display:block;
+}
+
+.btn-member a:hover img{
+	visibility:hidden;
+}
+
+/*--------member-1-----------*/
+.btn-member-1 a{
+	width:121px;
+}
+
+.btn-member-1 a:hover{
+	background: url(../images/btn-member-2-1.gif) no-repeat 0 0;
+	display:block;
+}
+
+.btn-member-1 a:hover img{
+	visibility:hidden;
+}
+
+
+/*---------------------menu-service --服務選項---------------------*/
+#menu-service{
+	border-right:1px solid #d2d2d2;
+	border-top:1px solid #d2d2d2;
+	border-left:1px solid #d2d2d2;
+	margin-bottom:10px;
+}
+
+#menu-service dt{
+	background:url(../images/titlebg-1.gif) repeat-x 0 0;
+	color:#313131;
+	height:34px;
+	line-height:34px;
+	text-indent:11px;
+	display:block;
+	margin-bottom:1px;
+}
+#menu-service dd{
+border-top:1px solid #d2d2d2;
+}
+#menu-service h1 {
+	background:url(../images/icon-1.png) no-repeat 95% center ;
+	font-size:16px;
+	font-family: Arial,微軟正黑體;
+	font-weight:bold;
+	border:1px solid #FFFFFF;
+}
+
+#menu-service h2{
+	background:url(../images/titlebg-2.gif) repeat-x 0 bottom;
+	height:36px;
+	display:block;
+	line-height:36px;
+	color:#cf1a02;
+	font-size:15px;
+	font-family: Arial,微軟正黑體;
+	font-weight:bold;
+	text-indent:35px;
+	display:block;
+	
+}
+#menu-service h2 span{
+	display:block;
+}
+
+#menu-service li {
+	border-bottom:1px solid #dcdcdc;
+	height:38px; line-height:38px;
+}
+
+#menu-service li a{
+	color:#000000;
+	font-size:15px;
+	font-family: Arial,微軟正黑體;
+	font-weight:bold;
+	display:block;
+	text-indent:48px;
+}
+
+#menu-service li a:hover{
+	color:#be1201;
+	text-decoration: none;
+}
+
+.menu-service-1 span{
+	background:url(../images/menu-service-1.png) no-repeat 14px  7px;
+}
+
+
+.menu-service-2 span{
+	background:url(../images/menu-service-2.png) no-repeat 3px 10px;
+}
+
+.menu-service-3 span{
+	background:url(../images/menu-service-3.png) no-repeat 4px  7px;
+}
+
+.menu-service-4 span{
+	background:url(../images/menu-service-4.png) no-repeat 9px  7px;
+}
+
+.menu-service-5 span{
+	background:url(../images/menu-service-5.png) no-repeat 9px  7px;
+}
+
+#menu-service .icon-1{
+	background: url(../images/menu-service-icon-1.png) no-repeat 10px  5px;
+}
+
+#menu-service .icon-1:hover{
+	background: url(../images/menu-service-icon-1-1.png) no-repeat 10px  5px;
+}
+
+#menu-service .icon-2{
+	background: url(../images/menu-service-icon-2.png) no-repeat 10px  5px;
+}
+
+#menu-service .icon-2:hover{
+	background: url(../images/menu-service-icon-2-1.png) no-repeat 10px  5px;
+}
+
+
+#menu-service .icon-3{
+	background: url(../images/menu-service-icon-3.png) no-repeat 10px  5px;
+}
+
+#menu-service .icon-3:hover{
+	background: url(../images/menu-service-icon-3-1.png) no-repeat 10px  5px;
+}
+
+#menu-service .icon-4{
+	background: url(../images/menu-service-icon-4.png) no-repeat 10px  5px;
+}
+
+#menu-service .icon-4:hover{
+	background: url(../images/menu-service-icon-4-1.png) no-repeat 10px  5px;
+}
+
+#menu-service .icon-5{
+	background: url(../images/menu-service-icon-5.png) no-repeat 10px  5px;
+}
+
+#menu-service .icon-5:hover{
+	background: url(../images/menu-service-icon-5-1.png) no-repeat 10px  5px;
+}
+
+#menu-service .icon-6{
+	background: url(../images/menu-service-icon-6.png)  no-repeat 10px  5px;
+}
+
+#menu-service .icon-6:hover{
+	background: url(../images/menu-service-icon-6-1.png)  no-repeat 10px  5px;
+}
+
+#menu-service .icon-7{
+	background: url(../images/menu-service-icon-7.png)  no-repeat 10px  5px;
+}
+
+#menu-service .icon-7:hover{
+	background: url(../images/menu-service-icon-7-1.png)  no-repeat 10px  5px;
+}
+
+.icon-8{
+	vertical-align: text-bottom;
+	margin-left:5px;
+}
+
+/*---------------menu-public----即時公共服務-------------------*/
+
+#menu-public{
+	border:1px solid #d2d2d2;
+}
+
+#menu-public dt{
+	background:url(../images/titlebg-1.gif) repeat-x 0 0;
+	color:#313131;
+	height:34px;
+	line-height:34px;
+	text-indent:11px;
+	display:block;
+	margin-bottom:1px;
+}
+#menu-public h1 {
+	background:url(../images/icon-1.png) no-repeat 95% center ;
+	font-size:16px;
+	font-family: Arial,微軟正黑體;
+	font-weight:bold;
+	border:1px solid #FFFFFF;
+}
+
+#menu-public h2{
+	background:url(../images/titlebg-2.gif) repeat-x 0 bottom;
+	height:36px;
+	line-height:36px;
+	color:#cf1a02;
+	font-size:15px;
+	font-family: Arial,微軟正黑體;
+	font-weight:bold;
+	text-indent:35px;
+	display:block;
+	border-top:1px solid #d2d2d2;
+}
+
+#menu-public h2 span{
+	display:block;
+}
+
+
+#menu-public p{
+	padding:5px 10px 8px 12px;
+}
+
+#menu-public p a{
+	color: #000000;
+	font-family: Arial,微軟正黑體;
+	font-size:14px;
+	line-height:22px;
+}
+
+#menu-public p a:hover{
+	text-decoration:underline;
+}
+
+.menu-public-1 span{
+	background:url(../images/menu-public-1.png) no-repeat 9px  7px;
+}
+
+.menu-public-2 span{
+	background:url(../images/menu-public-2.png) no-repeat 5px 4px;
+}
+
+.menu-public-3 span{
+	background:url(../images/menu-public-3.png) no-repeat 3px 8px;
+}
+
+.menu-public-4 span{
+	background:url(../images/menu-public-4.png) no-repeat 3px  10px;
+}
+
+
+/*-----------menu-article-----精選推薦文章--------------*/
+#menu-article{
+	width:267px;
+	float:left;
+}
+
+#menu-article h1{
+	background:url(../images/icon-3.png) no-repeat 9px 6px;
+	padding-left:23px;
+
+}
+
+#menu-article li{
+	font-family: Arial,微軟正黑體;
+	font-size:13px;
+	color:#000000;
+	clear:both;
+	border-bottom:1px dotted #d2d2d2;
+	padding:8px;
+	height:65px;
+}
+
+#menu-article li:last-child{
+	border-bottom: none;
+}
+
+#menu-article li img{
+	float:left;
+	margin-right:9px;
+}
+#menu-article li h3{
+	font-family: Arial,微軟正黑體;
+}
+
+#menu-article li a h3 {
+	color:#cf1a02;
+	font-size:14px;
+	margin-bottom:2px;
+	margin-top:3px;
+}
+
+/*-----------menu-hotservices-----熱門服務推薦--------------*/
+#menu-hotservices{
+	width:265px;
+	float:right;
+}
+
+#menu-hotservices h1{
+	background:url(../images/icon-2.png) no-repeat 9px 8px;
+	padding-left:23px;
+}
+
+#menu-hotservices ul{
+	padding:5px 0 1px 0;
+
+}
+
+#menu-hotservices li{
+	font-family: Arial,微軟正黑體;
+	font-size:13px;
+	color:#000000;
+	clear:both;
+	padding:5px 7px;
+
+
+}
+
+#menu-hotservices li img{
+	float:left;
+	margin-right:9px;
+	border:1px solid #dcdcdc;
+}
+#menu-hotservices li h3{
+	font-family: Arial,微軟正黑體;
+}
+
+#menu-hotservices li a h3 {
+	color:#cf1a02;
+	font-size:14px;
+	margin-bottom:2px;
+	margin-top:3px;
+}
+
+#hotservices {
+	border-top:none !important;
+	margin:11px 0 8px;
+}
+
+#hotservices li{
+	line-height:15px;
+	padding:2px 7px  !important;
+}
+
+#hotservices li a{
+	font-size:13px;
+	color:#434343;
+	padding:0px 7px 0 15px !important;
+	background:url(../images/icon-5.gif) no-repeat 3px 5px;
+	font-weight:bold;
+	
+}
+
+/*-----------menu-news-----最新商品&服務 / 本地服務--------------*/
+#menu-news{
+	clear:both;
+	padding-top:2px;
+}
+
+#menu-news dt{
+	display:block;
+	position:relative;
+	border-bottom:1px solid #dcdcdc;
+}
+
+#menu-news-link{
+	position:absolute;
+	width:60px;
+	right:10px;
+	top:0px;
+}
+
+#menu-news h1{
+	background:url(../images/icon-4.png) no-repeat 9px 5px;
+	padding-left:23px;
+}
+
+#menu-news ul{
+	padding:10px 0px 10px 5px;
+}
+
+#menu-news li{
+	float:left;
+	width:126px;
+	margin:0 4px;
+	text-align:center;
+}
+
+#menu-news li a{
+	font-family: Arial,微軟正黑體;
+	color:#cf1a02;
+	font-size:12px;
+	
+}
+
+#menu-news li a h3{
+	
+}
+
+
+
+/*-----------menu-notice-----本站公告--------------*/
+#menu-notice dl{
+	margin-bottom:12px;
+	padding-bottom:1px;
+}
+
+#menu-notice ul li{
+	border-bottom:1px solid #b9b9b9;
+	padding:8px 5px 6px 8px;
+}
+
+#menu-notice ul li a{
+	font-family: Arial,微軟正黑體;
+	color:#000000;
+	font-size:14px;
+	background:url(../images/icon-2.gif) no-repeat  0 2px;
+	padding:0 0 0 13px;
+	letter-spacing:-0.5px;
+}
+
+#menu-notice p {
+	margin:7px 0 0 6px;
+	
+}
+
+#menu-notice p img{
+	margin-bottom:3px;
+}
+
+
+/*-----------menu-dealer----熱門業者推薦--------------*/
+#menu-dealer dl{
+  margin-bottom:12px;
+}
+
+#menu-dealer ul {
+	padding:6px 10px 8px 13px;
+}
+
+#menu-dealer ul li{
+	padding:3px 0 3px 0;
+}
+
+#menu-dealer ul li a{
+	font-family: Arial,微軟正黑體;
+	color:#000000;
+	font-size:14px;
+	background:url(../images/icon-3.gif) no-repeat  0 3px;
+	padding:0 0 0 18px;
+	letter-spacing:-0.5px;
+}
+
+/*-----------menu-fb----粉絲專頁--------------*/
+#menu-fb ul{
+	padding:8px 4px 1px;
+}
+
+#menu-fb ul li{
+	border:1px solid #dcdcdc;
+	border-radius:3px;
+	background:url(../images/fb-bg.gif) bottom  left repeat-x;
+	display:block;
+	clear:both;
+	padding:8px 8px;
+	min-height:50px;
+	margin-bottom:6px;
+}
+
+#menu-fb ul li div{
+	min-height:60px;
+　display:table-cell;
+　vertical-align:middle;
+}
+
+#menu-fb .fb-pic{
+	float:left;
+	display:block;
+	margin-right:13px;
+}
+
+#menu-fb .fb-title{
+	display:block;
+	float:left;
+}
+
+#menu-fb h3{
+	margin-bottom:7px;
+	margin-top:3px;
+}
+
+#menu-fb h3 a{
+	color:#313131;
+	font-size:13px;
+	font-family: Arial,微軟正黑體;
+	
+}
+
+.fb-title img{
+	
+}
+
+
+
