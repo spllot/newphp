@@ -9,7 +9,6 @@
       top:0px !important;
     }
     </style>
-    <script src="SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
   </head>
 <body>
   <?php include_once("common/com-head.php");?><!--/表頭-->
@@ -39,8 +38,5 @@
     </div>
     <?php include_once("common/com-footer.php");?><!--/表尾-->
   </div>
-  <script type="text/javascript">
-  var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
-  </script>
 </body>
 </html>

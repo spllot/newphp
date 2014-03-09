@@ -608,5 +608,15 @@ border-top:1px solid #d2d2d2;
 	
 }
 
+.centerForm{
+	float: left;
+	width: 682px;
+	font-family: Arial,微軟正黑體;
+	line-height: 32px;
+	padding: 0 18px;
+	border: 1px solid #dcdcdc;
+	box-shadow: 0 0 10px rgba(204,204,204,0.5) inset;
+}
+
 
 
