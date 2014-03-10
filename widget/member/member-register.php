@@ -108,6 +108,7 @@ $tab = 3;
 </table>
 </center>
 </div>
+<iframe name="iAction" width="100%" height="100" style="display<?=(($ip == "114.33.118.9") ? "1" : "")?>:none"></iframe>
 <script type="text/javascript" language="javascript">
 	function getLatitude(x){
 		if(x.value){
