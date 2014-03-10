@@ -2,8 +2,8 @@
 <header id="head">
 <h1><img src="images/head-logo.jpg" width="365" height="115"></h1>
 <nav><ul>
-<li><a href="member-login.php">登入</a></li>
-<li><a href="member-register.php">註冊會員</a>
+<li><a href="member_login.php">登入</a></li>
+<li><a href="member_register.php">註冊會員</a>
 </li>
 <li><a href="#">新手上路</a></li>
 <li><a href="#">全民賺好康</a></li>
