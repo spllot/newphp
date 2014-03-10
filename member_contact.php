@@ -30,7 +30,7 @@
       <?php include_once("common/com-marque.php");?>
 
       <div id="wrap-content">
-        <?php include_once("widget/member/member-lead.php");?>
+        <?php include_once("widget/member/member-contact.php");?>
         <div id="sub-right" >
           <?php include_once("common/com-notice.php");?>
           <?php include_once("common/com-dealer.php");?>

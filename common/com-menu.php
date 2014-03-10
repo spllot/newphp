@@ -2,11 +2,11 @@
   <ul class="ab">
   <li ><a href="index.php" class="icon-7-1">首頁</a>
         <ul class="bc">
-          <li><a href="#">新手上路</a></li>
-          <li><a href="#">全民賺好康</a></li>
-          <li><a href="#">會員獲利公告</a></li>
-          <li><a href="#">用力協力資訊</a></li>
-          <li><a href="#">客服中心</a></li>
+          <li><a href="member_lead.php">新手上路</a></li>
+          <li><a href="member_active.php">全民賺好康</a></li>
+          <li><a href="member_profit.php">會員獲利公告</a></li>
+          <li><a href="member_profit.php">用戶協力資訊</a></li>
+          <li><a href="member_contact.php">客服中心</a></li>
         </ul>
   </li>
   <li><a href="service.php" class="icon-7-1">本地服務(即時)</a>

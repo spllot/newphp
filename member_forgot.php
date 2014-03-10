@@ -5,12 +5,10 @@
     <?php include_once("common/com-meta.php");?>
     <link href="SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css">
     <style type="text/css">
-      #quicklink{
-        top:0px !important;
-      }
+    #quicklink{
+      top:0px !important;
+    }
     </style>
-
-    <meta name="Keywords" content="購物網, 購物, 網路購物, 線上購物, 團購, 廉售, 即購網" /><meta name="description" content="InTimeGo即購商品資訊網 (簡稱 InTimeGo即購網) 是全民性的行動商務平台，係針對一般傳統商店、行動商店 (包含攤販、餐車、便利商店車...等)以及個人商務，進行動態商品或活動搜尋以及商品販售的網路平台." />
   </head>
 <body>
   <?php include_once("common/com-head.php");?><!--/表頭-->
@@ -30,7 +28,7 @@
       <?php include_once("common/com-marque.php");?>
 
       <div id="wrap-content">
-        <?php include_once("widget/member/member-lead.php");?>
+        <?php include_once("widget/member/member-forgot.php");?>
         <div id="sub-right" >
           <?php include_once("common/com-notice.php");?>
           <?php include_once("common/com-dealer.php");?>

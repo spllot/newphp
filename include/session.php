@@ -1,6 +1,7 @@
 <?php
 ini_set("session.save_path", "./tmp/");
 session_start();
+
 function my_round($value, $precision=0){
 	return round(round($value*pow(10, $precision+1), 0), -1)/pow(10, $precision+1);
 }
