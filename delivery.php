@@ -24,14 +24,14 @@
 }
 
 </style>
-<?php include_once("com-meta.php");?>
+<?php include_once("common/com-meta.php");?>
 </head>
 <body>
-<?php include_once("com-head.php");?><!--/表頭-->
+<?php include_once("common/com-head.php");?><!--/表頭-->
 <!--/上方服務選項-->
 <nav id="menu">
 <ul>
-<?php include_once("com-menu.php");?><!--/服務選項下拉選單-->
+<?php include_once("common/com-menu.php");?><!--/服務選項下拉選單-->
 <li class="menu-title"><img src="images/head-menu-delivery.gif" alt="本地服務" width="132" height="38"></li>
 <li class="menu-delivery01"><a href="#"><img src="images/head-menu-delivery01-1.gif" width="125" height="38"></a></li>
 <li class="menu-service02"><a href="#"><img src="images/head-menu-service02.gif" width="125" height="38"></a></li>
@@ -60,7 +60,7 @@
 <!--/search--></div>
 <!--/search-wrap--></div>
 <div id="wrap">
-<?php include_once("com-quicklink.php");?><!--/右邊服務選項-->
+<?php include_once("common/com-quicklink.php");?><!--/右邊服務選項-->
 <div id="wrap-content">
 <div id="content-in"> <!--/頁籤-->
 <div id="menu-recommend"><!--/即購網推薦-->
@@ -303,7 +303,7 @@
 <!--/menu-appraise--業者服務滿意--></div>
 <!--/sub-right--></div>
 <!--/wrap-content--></div>
-<?php include_once("com-footer.php");?><!--/表尾-->
+<?php include_once("common/com-footer.php");?><!--/表尾-->
 <!--/wrap--></div>
 </body>
 </html>

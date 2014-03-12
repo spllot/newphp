@@ -6,7 +6,7 @@
 </head>
 <body>
   <?php include_once("common/com-head.php");?><!--/表頭-->
-  <?php include_once("widget/service/service-menu.php");?>
+  <?php include_once("widget/service/service-menu4.php");?>
 
   <?php include_once("widget/service/service-search.php");?>
   <div id="wrap">
@@ -14,7 +14,7 @@
     <div id="wrap-content">
       <div id="content-in"> <!--/頁籤-->
         <?php include_once("widget/service/service-recommend.php");?>
-        <?php include_once("widget/service/service-list.php");?>
+        <?php include_once("widget/service/product2-detail.php");?>
       </div>
       <div id="sub-right" >
         <?php include_once("common/com-notice.php");?>

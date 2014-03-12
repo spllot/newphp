@@ -9,23 +9,23 @@
           <li><a href="member_contact.php">客服中心</a></li>
         </ul>
   </li>
-  <li><a href="service.php" class="icon-7-1">本地服務(即時)</a>
+  <li><a href="service_product4.php?tab=all" class="icon-7-1">本地服務(即時)</a>
          <ul class="bc">
-          <li><a href="service.php">即時商品服務</a></li>
-          <li><a href="#">粉絲行動推廣</a></li>
-          <li><a href="#">即時運輸服務</a></li>
-          <li><a href="#">即時人力服務</a></li>
-          <li><a href="#">即時活動服務</a></li>
+          <li><a href="service_product4.php?tab=all">即時商品服務</a></li>
+          <li><a href="service_product4.php?tab=activity">粉絲行動推廣</a></li>
+          <li><a href="service_product4.php?tab=transfer">即時運輸服務</a></li>
+          <li><a href="service_product4.php?tab=hr">即時人力服務</a></li>
+          <li><a href="service_product4.php?tab=event">即時活動服務</a></li>
         </ul>
   </li>
-  <li><a href="delivery.php" class="icon-7-1">宅配服務</a>
+  <li><a href="service_product5.php?tab=all" class="icon-7-1">宅配服務</a>
          <ul class="bc">
-          <li><a href="delivery.php">商品販售服務</a></li>
-          <li><a href="#">粉絲推廣服務</a></li>
+          <li><a href="service_product5.php?tab=all">商品販售服務</a></li>
+          <li><a href="service_product5.php?tab=activity">粉絲推廣服務</a></li>
         </ul>
   </li>
-  <li><a href="#">本地團購(即時)</a></li>
-  <li><a href="#">宅配團購</a></li>
+  <li><a href="service_product1.php">本地團購(即時)</a></li>
+  <li><a href="service_product2.php">宅配團購</a></li>
   <li><a href="#">監護服務(即時)</a></li>
   </ul>
   </li>

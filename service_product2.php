@@ -14,7 +14,7 @@
     <div id="wrap-content">
       <div id="content-in"> <!--/頁籤-->
         <?php include_once("widget/service/service-recommend.php");?>
-        <?php include_once("widget/service/service-list.php");?>
+        <?php include_once("widget/service/product2.php");?>
       </div>
       <div id="sub-right" >
         <?php include_once("common/com-notice.php");?>

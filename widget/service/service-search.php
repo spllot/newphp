@@ -1,3 +1,32 @@
+<style type="text/css">
+/*.btn-search-1{
+	right:33px !important;
+	top:10px!important;
+}
+#select-map{
+	width:560px;
+}*/
+#select-map{
+	border-right: none !important;
+}
+
+.btn-search-1{
+	right:60px !important;
+	top:12px!important;
+}
+.fb-good{
+	left:20px!important;
+}
+#select-btn{
+	margin-top: -10px;
+	padding-top: 0px;
+}
+#quicklink{
+	position:absolute;
+	right:-90px;
+	top:-88px !important;
+}
+</style>
 <?php
 include './include/db_open.php';
 $result = mysql_query("SELECT * FROM Catalog WHERE useFor='TYPE_AREA' ORDER BY Sort");
@@ -55,40 +84,46 @@ $act = str_replace("_detail", "", basename($_SERVER['PHP_SELF']));
 			<input type="hidden" name="tab" value="<?=$tab?>">
 			<input type="hidden" name="pageno" value="<?=$_REQUEST['pageno']?>">
 			<div id="select">
-				<input name="selectall" type="radio" value="">全部<br>
-				<input name="selectall" type="radio" value="">公益品項<br>
-				<input name="selectall" type="radio" value="" checked="CHECKED">全新品項<br>
-				<input name="selectall" type="radio" value="">中古即期品<br>
+				<ul>
+					<li>
+						<input name="type" type="radio" value="all"  checked="CHECKED">全部<br>
+						<input name="type" type="radio" value="welfare">公益品項<br>
+					</li>
+					<li>
+						<input name="type" type="radio" value="allnew">全新品項<br>
+						<input name="type" type="radio" value="used">中古即期品<br>
+					</li>
+				</ul>
 				<!--/select-->
 			</div>
 			<div id="select-map">
-				搜尋位置 :&nbsp;<input name="address" type="text" size="40" onblur="getLatitude();" class="input-1 icon-search" id="address" placeholder=" 輸入查詢位置地址" size="45" onfocus="if (value==defaultValue){ value=''; className='input-1 icon-search'; }" onblur="if (value==''){ value=defaultValue; className='input-1 icon-search'; }">&nbsp;或&nbsp;<input type="text" class="input-1" placeholder="經度" name="long" id="long" size="10" onfocus="if (value==defaultValue){ value=''; className='input-1'; }" onblur="if (value==''){ value=defaultValue; className='input-1'; }">
+				<!-- 搜尋位置 :&nbsp;<input name="address" type="text" size="40" onblur="getLatitude();" class="input-1 icon-search" id="address" placeholder=" 輸入查詢位置地址" size="45" onfocus="if (value==defaultValue){ value=''; className='input-1 icon-search'; }" onblur="if (value==''){ value=defaultValue; className='input-1 icon-search'; }">&nbsp;或&nbsp;<input type="text" class="input-1" placeholder="經度" name="long" id="long" size="10" onfocus="if (value==defaultValue){ value=''; className='input-1'; }" onblur="if (value==''){ value=defaultValue; className='input-1'; }">
 				<input type="text" name="lat" id="lat" class="input-1" placeholder="緯度" size="10" onfocus="if (value==defaultValue){ value=''; className='input-1'; }" onblur="if (value==''){ value=defaultValue; className='input-1'; }"><br>
-				分類選擇 :&nbsp;				
-				<td style="width:142px; height:45px; text-align:left">
-					<select style="width:132px"  class="input-2 icon-search" id="catalog" name="catalog" onChange="getCat2('');">
+				分類選擇 :&nbsp;	 -->			
+<!-- 				<td style="width:142px; height:45px; text-align:left">
+ -->				<select style="width:132px"  class="input-2 icon-search" id="catalog" name="catalog" onChange="getCat2('');">
 						<option value="">所有分類</option><?=$catalog_list?>
 					</select>
-				</td>
-				<td style="width:142px; height:45px; text-align:left">
+				<!-- </td>
+				<td style="width:142px; height:45px; text-align:left">-->
 					<select style="width:132px"  class="input-2" id="catalog2" name="catalog2" onChange="getCat3('');" disabled>
 						<option value="">所有分類</option>
 					</select>
-				</td>
-            	<td style="width:150px; height:45px; text-align:left">
+				<!-- </td>
+            	<td style="width:150px; height:45px; text-align:left">-->
 					<select style="width:132px" class="input-2" id="catalog3" name="catalog3" disabled>
 						<option value="">所有分類</option>
 					</select>
-				</td>
-				<input name="送出" type="button" value="搜尋" style="cursor:pointer" class="btn-search-1" onMouseOver="btnOver(this)" onMouseOut="btnOut(this)" onClick="Search();">
+<!-- 				</td>
+ -->				<input name="送出" type="button" value="搜尋" style="cursor:pointer" class="btn-search-1" onMouseOver="btnOver(this)" onMouseOut="btnOut(this)" onClick="Search();">
 				<!--/select-map-->
 			</div>
-			<div id="select-btn"> 
+			<!-- <div id="select-btn"> 
 				<ul>
 					<li class="select-btn-1"><a href="#"><img src="images/select-btn-1-1.gif" width="93" height="28"></a></li>
 					<li class="select-btn-2"><a href="service-map.php"><img src="images/select-btn-2.gif" width="93" height="28"></a></li>
-				</ul><!--/select-btn-->
-			</div>
+				</ul>
+			</div> -->
 		</form>
 	</div>
 </div>
