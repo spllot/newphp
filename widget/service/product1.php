@@ -6,8 +6,8 @@ $tab= $_REQUEST['tab'];
 $area=$_REQUEST['area'];
 $type=$_REQUEST['type'];
 $catalog=$_REQUEST['catalog'];
-$catalog2=$_REQUEST['catalog2'];
-$catalog3=$_REQUEST['catalog3'];
+$catalog2=isset($_REQUEST['catalog2']) ? $_REQUEST['catalog2'] : 0;
+$catalog3=isset($_REQUEST['catalog3']) ? $_REQUEST['catalog3'] : 0;
 
 $tmp_type = $type;
 if($type != "all"){
@@ -407,7 +407,7 @@ $WEB_CONTENT .= <<<EOD
 <div id="dis" style="position:absolute;display:none; width:120px; padding:0px; text-align:center; background:#ffffcc; border-radius: 8px; border:solid 5px gray; z-index:99; padding-left:5px; padding-right:5px; padding-bottom:5px" onMouseOver="showDis();" onMouseOut="hideDis();">
 &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">距離： ? </span><br>
 <a href='member_location.php?url=$url&tab=1' style='text-decoration:underline'>請輸入我的位置<br>，再回頁面！</a></font>
-</div>
+</div></div>
 EOD;
 
 

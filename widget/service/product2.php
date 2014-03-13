@@ -6,8 +6,8 @@ $tab= $_REQUEST['tab'];
 $area=$_REQUEST['area'];
 $type=$_REQUEST['type'];
 $catalog=$_REQUEST['catalog'];
-$catalog2=$_REQUEST['catalog2'];
-$catalog3=$_REQUEST['catalog3'];
+$catalog2=isset($_REQUEST['catalog2']) ? $_REQUEST['catalog2'] : 0;
+$catalog3=isset($_REQUEST['catalog3']) ? $_REQUEST['catalog3'] : 0;
 
 $tmp_type = $type;
 if($type != "all"){
@@ -394,7 +394,7 @@ EOD;
 	$WEB_CONTENT .= "</tr>";
 }
 
-$WEB_CONTENT .= "</table>";
+$WEB_CONTENT .= "</table></div>";
 
 
 include './include/db_close.php';

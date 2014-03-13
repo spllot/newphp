@@ -16,13 +16,13 @@
         <?php include_once("widget/service/service-recommend.php");?>
         <?php include_once("widget/service/product1.php");?>
       </div>
-      <div id="sub-right" >
-        <?php include_once("common/com-notice.php");?>
-        <?php include_once("widget/service/service-hot.php");?>
-        <?php include_once("widget/service/service-appraise.php");?>
-      </div>
     </div>
-    <?php include_once("common/com-footer.php");?><!--/表尾-->
   </div>
+  <div id="sub-right" >
+    <?php include_once("common/com-notice.php");?>
+    <?php include_once("widget/service/service-hot.php");?>
+    <?php include_once("widget/service/service-appraise.php");?>
+  </div>
+  <?php include_once("common/com-footer.php");?><!--/表尾-->
 </body>
 </html>

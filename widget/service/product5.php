@@ -652,7 +652,7 @@ EOD;
 	$WEB_CONTENT .= "</tr>";
 }
 
-$WEB_CONTENT .= "</table>";
+$WEB_CONTENT .= "</table></div>";
 
 
 include './include/db_close.php';
