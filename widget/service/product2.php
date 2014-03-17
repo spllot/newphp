@@ -103,18 +103,18 @@ if ($num>0){
 
 			$discount = (float)(number_format(($data['Price1'] / $data['Price'])*10,1));
 			if($discount <= 0){
-				$discount = "<span style='color:red; font-size:30px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>免費</span>";
+				$discount = "<span style='font-size:20px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>免費</span>";
 			}
 			else if($discount >= 10){
 				$discount = "";
 			}
 			else{
 				$d = explode(".", strval($discount));
-				$discount = "<span style='color:red; font-size:40px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>". $d[0] . "</span>";
+				$discount = "<span style='font-size:20px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>". $d[0] . "</span>";
 				if(sizeof($d) > 1){
-					$discount .= "<span style='color:red; font-size:24px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>.". $d[1] . "</span>";
+					$discount .= "<span style='font-size:20px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>.". $d[1] . "</span>";
 				}
-				$discount = $discount . "<span style='color:red; font-size:16px; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>折</span>";
+				$discount = $discount . "<span style='font-size:20px; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>折</span>";
 			}
 
 
@@ -183,7 +183,7 @@ EOD;
 				$price = "- -";
 				$save = "- -";
 				$price_decoration="none";
-				$discount = "<span style='color:red; font-size:40px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>--</span> <span style='color:red; font-size:30px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>折</span>";
+				$discount = "<span style='color:red; font-size:40px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>--</span> <span style='font-size:20px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>折</span>";
 			}
 
 			if($data['Transport'] == 1){
@@ -226,24 +226,24 @@ EOD;
 						</table>
 EOD;
 			if(strpos($data['CName'], "展演") > -1){
-				$activity = ";background:url('./images/show.gif'); background-repeat:no-repeat; background-position:558px 23px";
+				$activity = ";background:url('./images/show.gif'); background-repeat:no-repeat; background-position:605px 3px";
 			}
 			else if($data['hr'] == 1){
-				$activity = ";background:url('./images/hr.gif'); background-repeat:no-repeat; background-position:558px 23px";
+				$activity = ";background:url('./images/hr.gif'); background-repeat:no-repeat; background-position:605px 3px";
 			}
 			else if($data['event'] == 1){
-				$activity = ";background:url('./images/activity2.gif'); background-repeat:no-repeat; background-position:558px 23px";
+				$activity = ";background:url('./images/activity2.gif'); background-repeat:no-repeat; background-position:605px 3px";
 			}
 			else{
-				$activity = ";background:url('./images/product.gif'); background-repeat:no-repeat; background-position:558px 23px";
+				$activity = ";background:url('./images/product.gif'); background-repeat:no-repeat; background-position:605px 3px";
 			}
 
 			$WEB_CONTENT .= <<<EOD
 				<tr>
 					<td style="text-align:left; background:white">
-						<div style="width:676px; height:279px; overflow:hidden; background:url('./images/bg_product2.png');">
-							<div style="width:676px; height:279px; overflow:hidden">
-								<table width="676" height="279" cellpadding="0" cellspacing="0" border=0 style="{$activity}">
+						<div class="product-item">
+							<div style="width:720px; height:279px; overflow:hidden">
+								<table width="720" height="279" cellpadding="0" cellspacing="0" border=0 style="{$activity}">
 									<tr>
 										<td style="width:348px; height:22px; color:white">
 											<table cellpadding="0" cellspacing="0" border=0 style="width:348px">
@@ -260,25 +260,23 @@ EOD;
 										<div style="width:305px; height:198px; overflow:hidden; border:solid 0px gray"><a href="service_product2_detail.php?tab={$tab}&no={$data['No']}&area={$area}&type={$type}&catalog={$catalog}"><img src="./upload/{$data['Photo']}" style="width:305px; height:198px" border='0'></a></div>
 										</td>
 										<td style="vertical-align:top; padding-left:5px" valign="top" >
-											<div style="width:218px; height:28px; margin-top:15px; border:solid 0px gray; overflow:hidden"><a href="service_product2_detail.php?tab={$tab}&no={$data['No']}&area={$area}&type={$type}&catalog={$catalog}" style="color:#000000; font-size:22px; font-weight:bold">{$name}</a></div>
-											<div style="width:270px; height:36px; line-height:18px; margin-top:4px; border:solid 0px gray; overflow:hidden; font-size:14px">{$data['Description']}</div>
+											<div  style="margin-top: 20px;"><a class="product-title" href="service_product2_detail.php?tab={$tab}&no={$data['No']}&area={$area}&type={$type}&catalog={$catalog}" style="color:#000000; font-size:22px; font-weight:bold">{$name}</a></div>
+											<div class="product-desc">{$data['Description']}</div>
 											<div style="width:310px; height:30px; margin-top:2px; border:solid 1px transparent; overflow:hidden; text-align:center; color:blue; font-size:13px; line-height:30px"></div>
-											<div style="width:300px; height:24px; margin-top:4px; border:solid 0px gray; overflow:hidden; text-align:center"><a href="member_product.php?no={$data['Member']}" style="color:#FFFFFF; font-size:14px" target="_blank">商家 [{$seller}] 其它服務</a></div>
-											<div style="width:300px; height:58px; margin-top:12px; border:solid 1px transparent; overflow:hidden">
-												<table style="width:300px" cellpadding="0" cellspacing="0" border=0>
-													<tr>
-														<td><div style='height:54px; width:210px; overflow:hidden'>{$price_info}</div></td>
-														<td style="width:90px; height:54px; text-align:center; padding-right:3px">{$discount}</td>
-													</tr>
-												</table>
+											<div  class="product-shop"><a href="member_product.php?no={$data['Member']}" style="color:#FFFFFF; font-size:14px" target="_blank">商家 [{$seller}] 其它服務</a></div>
+											<div id="product-list-price-info">
+												<div class="product-list-price">
+													<ul><li><h2>{$price_info}</h2></li></ul>
+													<span style="display:inline-block;margin-top:12px;margin-left:9px;">{$discount}</span>
+												</div>
 											</div>
 											<div style="width:300px; height:22px; margin-top:5px; border:solid 1px transparent; overflow:hidden">
 												<table style="width:300px" cellpadding="0" cellspacing="0" border=0>
 													<tr>
-														<td style="width:27px; height:22px; text-align:right; padding-right:2px"><img src="./images/sold.png"></td>
-														<td style="width:60px; height:22px; line-height:22px; color:black">{$activity_join}</td>
-														<td style="width:22px; height:22px; text-align:right; padding-right:2px"><img src="./images/clock.png"></td>
-														<td style="width:100px; height:22px; line-height:22px; color:black"><div id="timer{$data['No']}">{$activity_timer}</div></td>
+														<td style="width:27px; height:22px; text-align:right; padding-right:2px"><img src="./images/icon-buy.png"></td>
+														<td style="font-family: Arial,微軟正黑體;font-weight: bold;font-size: 14px;color: #a41101">{$activity_join}</td>
+														<td style="width:22px; height:22px; text-align:right; padding-right:2px"><img src="./images/icon-time.png"></td>
+														<td style="font-family: Arial,微軟正黑體;font-weight: bold;color: #434343;font-size: 14px;"><div id="timer{$data['No']}">{$activity_timer}</div></td>
 													</tr>
 												</table>
 											</div>

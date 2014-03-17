@@ -247,12 +247,12 @@
 	
 }
 
-#menu-recommend dl{
+#menu-recommend dl,#menu-recommend .outer{
 	background:url(../images/recommend-bg-2.gif) 0 center repeat-y;
 	
 }
 
-#menu-recommend dt{
+#menu-recommend dt,#menu-recommend .header{
 	color:#313131;
 	height:46px;
 	line-height:43px;
@@ -266,7 +266,7 @@
 	
 }
 
-#menu-recommend dt h1 {
+#menu-recommend dt h1 ,#menu-recommend .header h1{
 	font-size:18px;
 	font-family: Arial,微軟正黑體;
 	font-weight:bold;
@@ -274,10 +274,17 @@
 	padding-left:33px;
 }
 
-
-#menu-recommend dd{
+#menu-recommend #scrollbarDemo2{
+	margin-left: -3px;
+	margin-top: -3px;
+	border-left: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+	width: 719px;
+	margin-bottom: -15px;
+}
+#menu-recommend dd, #menu-recommend .footer{
 	background:url(../images/recommend-bg-3.gif)  center bottom no-repeat;
-	
+	height: 28px;
 }
 
 #menu-recommend ul{
@@ -300,7 +307,7 @@
 	text-decoration:underline;
 }
 
-#menu-recommend li{
+#menu-recommend li,#menu-recommend .item{
 	float:left;
 	width:119px;
 	height:159px;
@@ -309,12 +316,12 @@
 	margin-right:4px;
 }
 
-#menu-recommend li p{
+#menu-recommend li p,#menu-recommend .title{
 	font-family: Arial,微軟正黑體;
 	font-size:12px;
 	text-align:left;
 	line-height:20px;
-
+	padding-right: 18px;
 }
 
 
@@ -339,7 +346,7 @@
 	margin-left:13px;
 }
 
-#product-list dl dt ul li{
+#product-list dl dt ul li,.product-list-text-1,.top-title1,.product-list-text-2,.top-title2{
 	float:left;
 	height:25px;
 	line-height:25px;
@@ -349,17 +356,56 @@
 	font-weight:bold;
 	font-family: Arial,微軟正黑體;
 }
-.product-list-text-1{
+.product-list-text-1,.top-title1{
 	width:162px;
 	background:url(../images/service-products-bg-2.gif) no-repeat 0 0;
 	font-weight: normal;
 }
 
-.product-list-text-2{
+.product-list-text-2,.top-title2{
 	width:203px;
 	background:url(../images/service-products-bg-3.gif) no-repeat 0 0;
 }
-
+.table-title{
+	margin-top: -32px;
+	position: absolute;
+}
+.product-item{
+	width:720px;
+	height:262px;
+	overflow:hidden;
+	background:url(../images/service-products-bg-1.gif);
+	margin-top: 30px;
+}
+.product-title{
+	color: #a41101;
+	font-size: 22px;
+	font-family: Arial,微軟正黑體;
+	width: 266px;
+	font-weight: bolder;
+}
+.product-desc{
+	font-family: Arial,微軟正黑體;
+	font-size: 15px;
+	color: #434343;
+	line-height: 22px;
+	width: 345px;
+	font-weight: bold;
+	height: 43px;
+	overflow: hidden;
+}
+.product-shop{
+	color: #ffffff;
+	font-family: Arial,微軟正黑體;
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: -23px;
+	margin-left: 40px;
+}
+#product-list-price-info{
+	margin-top: 15px;
+	margin-left: 5px;
+}
 .fb-good{
 	border:1px solid #c4c4c4;
 	font-size:11px ;
@@ -494,13 +540,9 @@
 }
 
 .product-list-price span{
-	position:absolute;
-	right:5px;
-	top:10px;
 	font-size:20px;
 	font-family: Arial,微軟正黑體;
 	color:#a41101;
-	width:78px;
 	text-align:center;	
 }
 
