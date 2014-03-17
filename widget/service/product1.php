@@ -362,46 +362,31 @@ EOD;
 			break;
 		}
 	}
-	$WEB_CONTENT .= "<tr>";
-	$WEB_CONTENT .= "	<td style='padding-left:5px; padding-right:10px; text-align:right'><br><a href='#top' style='color:black' onClick=\"window.location.href='#top'\"><img src='./images/asc.gif' border=0>Top</a></td></tr>";
-	$WEB_CONTENT .= "<tr>";
-	$WEB_CONTENT .= "	<td style='padding-left:5px; padding-right:10px'>";
-	$WEB_CONTENT .= "		<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" align='center' style=\"height:40px; background:url('./images/bg_pagger.png'); background-repeat:repeat-x\">";
-    $WEB_CONTENT .= "           <tr>";
-	if($pageno > 1){
-		$WEB_CONTENT .= "             <td style='width:74px; height:40px; text-align:center; background-image:url(./images/btn_100_black.jpg1); background-repeat:no-repeat; background-position: center center'>";
-		$WEB_CONTENT .= "				<a href=\"javascript:" . (($pageno > 1) ? "setPage(" . ($pageno - 1) . ")" : "void(0)"). ";\" style='color:black; text-decoration:underline'>上一頁</a>";
-	}
-	else{
-		$WEB_CONTENT .= "             <td style='width:74px; height:40px; text-align:left; padding-left:10px;'>&nbsp;";
-	}
-	$WEB_CONTENT .= "			  </td>";
-    $WEB_CONTENT .= "             <td align=\"center\" nowrap><table><tr>";
-	for($i=0; $i<$pages; $i++){
-		$p = "<div style='width:18px; height:18px; border:solid 0px black; line-height:18px'>" . ($i+1) . "</div>";
-		if(($i+1)==$pageno){
-			$WEB_CONTENT .= "<td style='text-decoration:none; width:20px; color:; text-align:center'>" . $p . "</td>";		
-		}
-		else{
-			$WEB_CONTENT .= "<td onClick=\"javascript:setPage(" . ($i+1) . ");\" style='cursor:pointer; color:; text-decoration:underline; width:20px; text-align:center'>" . $p . "</td>";		
-		}
-	}
-	$WEB_CONTENT .= "			</tr></table></td>";
-	if($pageno < $pages){
-		$WEB_CONTENT .= "			<td style='width:74px; height:40px; text-align:center; background-image:url(./images/btn_100_black.jpg1); background-repeat:no-repeat; background-position: center center'>";
-		$WEB_CONTENT .= "				<a href=\"javascript:" . (($pageno < $pages) ? "setPage(" . ($pageno + 1) . ")" : "void(0)") . ";\" style='color:black; text-decoration:underline'>下一頁</a>";
-	}
-	else{
-		$WEB_CONTENT .= "             <td style='width:74px; height:40px; text-align:left; padding-left:10px;'>&nbsp;";
-	}
-	$WEB_CONTENT .= "			</td>";
-	$WEB_CONTENT .= "			</tr>";
 	$WEB_CONTENT .= "		</table>";
 	$WEB_CONTENT .= "	</td>";
 	$WEB_CONTENT .= "</tr>";
 }
-
 $WEB_CONTENT .= "</table>";
+//分页
+$WEB_CONTENT .= "<div class='page'><ul>";
+if($pageno > 1){
+	$WEB_CONTENT .= "<li class='page-prev'><a href='javascript:" . (($pageno > 1) ? "setPage(" . ($pageno - 1) . ")" : "void(0)"). ';">&lt;上一頁</a></li>';
+}
+$WEB_CONTENT .= "<li class='page-number'>";
+for($i=0; $i<$pages; $i++){
+	if(($i+1)==$pageno){
+		$WEB_CONTENT .= intval($i+1) ;
+	}
+	else{
+		$WEB_CONTENT .= "<a style='margin-left: 10px;' href='javascript:" . "setPage(" . ($i+1) . ")". ';\'>'. ($i+1)."</a>";
+	}
+}
+$WEB_CONTENT .= "</li>";
+if($pageno < $pages){
+	$WEB_CONTENT .= "<li class='page-next'><a href='javascript:" . (($pageno < $pages) ? "setPage(" . ($pageno + 1) . ")" : "void(0)"). ";'>下一頁&gt;</a></li>";
+}
+$WEB_CONTENT .="</ul></div>";
+
 $url = urlencode("product1.php?area=$area&catalog=$catalog&type=$type&pageno=$pageno");
 $WEB_CONTENT .= <<<EOD
 <div id="dis" style="position:absolute;display:none; width:120px; padding:0px; text-align:center; background:#ffffcc; border-radius: 8px; border:solid 5px gray; z-index:99; padding-left:5px; padding-right:5px; padding-bottom:5px" onMouseOver="showDis();" onMouseOut="hideDis();">
