@@ -912,6 +912,10 @@
 	height:38px;
 	padding-left:5px;
 	margin-bottom:8px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 720px;
 }
 
 .in-h1 span{
@@ -1579,4 +1583,14 @@ ul#global_navi li.expandable span a{
 .TabbedPanelsContentIn{
 	height: 120px;
 }
-
+.arrow{
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	background-position: 0px 0px;
+	color: #666;
+	margin-right: 10px;
+	margin-top: 1px;
+	float: right;
+	background: url(../images/service-in-join-btn-1.png) no-repeat 96% -1px;
+}

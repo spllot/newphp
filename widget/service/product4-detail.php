@@ -271,7 +271,7 @@ div.fb_dialog_advanced+div.fb_dialog_advanced {
 	}
 
 </script>
-<table cellpadding='0' cellspacing='0' border='0' width='660' style='background:white'>
+<table cellpadding='0' cellspacing='0' border='0' width='660' style='background:white; font-family: Arial,微軟正黑體; font-size: 14px; line-height: 20px;'>
 EOD;
 $activity_join = "N.A.";
 $activity_ratio = "N.A.";
@@ -410,11 +410,11 @@ EOD;
 			else if($data['Transport'] == 1){
 				$holder="商家";
 			}
-			$buy_info = "服務詳情請參考<br>以下之說明介紹";
-			$photos = '<li class="J_ECPM"><img alt="吉達資訊圖片輪播一" src="./upload/' . $data['Photo'] . '" style="width:396px; height:248px"></li>';
-			$photos .= (($data['Slide'] == 1 && $data['Slide2'] != "") ? '<li class="J_ECPM"><img alt="吉達資訊圖片輪播二" src="' . $data['Slide2'] . '" style="width:396px; height:248px"></li>' : "");
-			$photos .= (($data['Slide'] == 1 && $data['Slide3'] != "") ? '<li class="J_ECPM"><img alt="吉達資訊圖片輪播三" src="' . $data['Slide3'] . '" style="width:396px; height:248px"></li>' : "");
-			$photos .= (($data['Slide'] == 1 && $data['Slide4'] != "") ? '<li class="J_ECPM"><img alt="吉達資訊圖片輪播四" src="' . $data['Slide4'] . '" style="width:396px; height:248px"></li>' : "");
+			$buy_info = "服務詳情請參考以下之說明介紹";
+			$photos = '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播一" src="./upload/' . $data['Photo'] . '" style="width: 393px;height: 245px"></li>';
+			$photos .= (($data['Slide'] == 1 && $data['Slide2'] != "") ? '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播二" src="' . $data['Slide2'] . '" style="width: 393px;height: 245px"></li>' : "");
+			$photos .= (($data['Slide'] == 1 && $data['Slide3'] != "") ? '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播三" src="' . $data['Slide3'] . '" style="width: 393px;height: 245px"></li>' : "");
+			$photos .= (($data['Slide'] == 1 && $data['Slide4'] != "") ? '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播四" src="' . $data['Slide4'] . '" style="width: 393px;height: 245px"></li>' : "");
 			if($data['Transport'] == 1){
 				$discount = (($data['taxi_discount']) ? "{$data['taxi_discount']}折":"");
 			}
@@ -684,9 +684,9 @@ EOD;
 			
 			$code = $data['Member'] . str_pad($data['No'], 5, "0", STR_PAD_LEFT);
 			$share = <<<EOD
-				<tr>
+				<tr id="service-in-use">
 					<td style="padding-top:22px;text-align:right" align='right'>
-					<div style="float:left; line-height:30px">服務代碼：<font color=>{$code}</font></div>
+					<div style="float:left; line-height:30px">服務代碼：<font style="color:red;font-weight:bolder">{$code}</font></div>
 					<table border=0 align="right">	
 						<tr>
 							<tD><!--div class="fb-like" data-href="http://{$WEB_HOST}/service_product4_detail.php?no={$no}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div--></td>
@@ -697,7 +697,7 @@ EOD;
 				facebook_show_display(); 
 				</SCRIPT></td>
 							<td>　加入收藏追蹤：</td>
-							<td><img src="./images/plus.png" border="0" style="cursor:pointer" onClick="addFavorite('{$data['No']}');" title="加入收藏可以隨時隨地掌握商家位置"></td>
+							<td><img src="./images/in-use-add.gif" border="0" style="cursor:pointer" onClick="addFavorite('{$data['No']}');" title="加入收藏可以隨時隨地掌握商家位置"></td>
 						</tr>
 					</table>
 					
@@ -710,38 +710,44 @@ EOD;
 			
 			$question = <<<EOD
 				<tr>
-					<td style="padding-top:22px;text-align:left" align='left'>
-						<table cellpadding="0" cellpadding="0"><tr><td>訂閱電子報：</td><td><input type="text" style="width:400px" name="email" id="email"></td><td><input type="button" value="訂閱" onClick="Subscribe('{$data['No']}')"></td></tr></table>
+					<td style="font-family: Arial,微軟正黑體;margin: 15px 0;background-color: #e5e5e5;padding: 8px 0px 8px 15px;font-size:17px;" align='left'>
+						<table cellpadding="0" cellpadding="0"><tr><td>訂閱電子報：</td><td><input type="text" style="width:470px;padding:3px;" name="email" id="email"></td><td><input type="button" value="訂閱" class="service-in-epaper-btn" onClick="Subscribe('{$data['No']}')"></td></tr></table>
 					</td>
 				</tr>
 				<tr>
-					<td style="padding-top:22px;text-align:left" align='left'>
-				♦業者 {$data['userName']}</font><a href="javascript:parent.Dialog('seller_trust.php?id={$data['Member']}');">(金流交易評價：{$data['Rate']})</a>;&nbsp; 
-					
-				♦<a href="javascript:sellerProduct('{$data['Member']}');">業者其它服務</a>;&nbsp; 
-					
-				♦{$q_url}詢問業者問題</a>
-				♦{$c_url}發表本服務評論</a>
+					<td id="service-in-shop-title" style="padding-top:15px;padding-bottom:10px;">
+						<p class="in-shop-icon-1">
+							業者 {$data['userName']}</font><a href="javascript:parent.Dialog('seller_trust.php?id={$data['Member']}');">(金流交易評價：{$data['Rate']})</a>
+						</p>
+						<p class="in-shop-icon-2">
+							<a href="javascript:sellerProduct('{$data['Member']}');">業者其它服務</a> 
+						</p>
+						<p class="in-shop-icon-3">
+							{$q_url}詢問業者問題</a>
+						</p>
+						<p class="in-shop-icon-4">
+							{$c_url}發表本服務評論</a>
+						</p>
 					</td>
 				</tr>
 				<tr>
-					<td style="text-align:left; line-height:40px" align='left'>
+					<td style="text-align:left; line-height:40px">
 						<table cellpadding="0" cellspacing="0" border="0">
 							<tr>
-								<td><img src="./images/pencil-1.png" style="height:24px"></td>
-								<td style="padding-left:5px">最新詢問與評論文章</td>
+								<td><!--<img src="./images/pencil-1.png" style="height:24px">--></td>
+								<td id="service-in-comment"><h1 style="padding-top:0px;padding-bottom:0px;">最新詢問與評論文章</h1></td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td style="text-align:left" align='left'>
-						<table style="width:100%" border="0">
+					<td style="text-align:center" align='left'>
+						<table style="width:100%" border="0" class="in-comment-table">
 							<tr>
-								<td style="width:100px; line-height:30px; background:#b5b2b5;text-align:center">作者</td>
-								<td style="; line-height:30px; background:#b5b2b5;text-align:center">留言內容</td>
-								<td style="width:120px; line-height:30px; background:#b5b2b5;text-align:center">評分 ({$av} av)</td>
-								<td style="width:120px; line-height:30px; background:#b5b2b5;text-align:center">留言時間</td>
+								<th width="14%">作者</th>
+								<th width="45%">留言內容</th>
+								<th width="18%">評分 ({$av} av)</th>
+								<th width="23%">留言時間</th>
 							</tr>
 							<tr style="height:11px"></tr>
 							{$rating}
@@ -922,7 +928,7 @@ EOD;
 
 					<tr style="height:22px"></tr>
 					<tr>
-						<td style="cursor:pointer;text-align:left; background:url('./images/green_bar_down.gif'); background-repeat:no-repeat; background-position:center center; height:40px; width:612px; padding-left:10px; font-size:16pt; font-weight:bold" onClick="Switch('8');" align='left' id="b8">活動參與須知</td>
+						<td style="cursor:pointer;text-align:left; background:url('./images/global_navi-bg.jpg'); background-repeat:no-repeat; background-position:center center; height:40px; width:612px; padding-left:10px; font-size:16pt; font-weight:bold" onClick="Switch('8');" align='left' id="b8">活動參與須知<span class="arrow down"></span></td>
 					</tr>
 					<tr>
 						<td id="p8" style="display:none; text-align:left; padding-left:10px; padding-top:10px" align='left'>
@@ -1063,20 +1069,20 @@ EOD;
 
 			
 			$detail = <<<EOD
-															<table cellpadding="0" cellspacing="0">
+															<table cellpadding="0" cellspacing="0" class="service-in-dec" width="100%">
 																<tr style="height:30px">
-																	<td style="width:100px;text-align:center; background:#FFAA73">原價{$price}</td>
-																	<td style="width:100px;text-align:center; background:#FF7510">{$discount}</td>
+																	<td width="50%" style="background-color: #cbc9c9;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;">原價{$price}</td>
+																	<td width="50%" style="background-color: #f0b3b3;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;">{$discount}</td>
 																</tr>
 																<tr style="height:2px"></tr>
 																<tr style="height:30px">
-																	<td style="width:100px;text-align:center; background:#FFAA73">{$activity_join}</td>
-																	<td style="width:100px;text-align:center; background:#FF7510">{$activity_ratio}</td>
+																	<td width="50%" style="background-color: #cbc9c9;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;">{$activity_join}</td>
+																	<td width="50%" style="background-color: #f0b3b3;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;">{$activity_ratio}</td>
 																</tr>
 																<tr style="height:2px"></tr>
 																<tr style="height:30px">
-																	<td style="width:100px;text-align:center; background:#FFAA73">{$city}</td>
-																	<td style="width:100px;text-align:center; background:#FF7510; font-size:14px; font-size:14px"><div id="timer{$data['No']};">{$activity_timer}</div></td>
+																	<td width="50%" style="background-color: #cbc9c9;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;">{$city}</td>
+																	<td width="50%" style="background-color: #f0b3b3;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;"><div id="timer{$data['No']};">{$activity_timer}</div></td>
 																</tr>
 															</table>
 EOD;
@@ -1144,18 +1150,18 @@ EOD;
 
 if($data['Transport'] == 1){
 		$price_info = <<<EOD
-			<span style="font-size:20pt; color:red; font-family:Arial">{$data['taxi_discount']}</span>
+			<span style="color: #a41101;font-family: Arial;font-size: 24px;font-weight: bold;">{$data['taxi_discount']}</span>
 EOD;
 }
 else{
 	if($data['price_mode'] == 0){
 		$price_info = <<<EOD
-			<span style="font-size:20pt; color:red; font-family:Arial">{$sell}</span> <span style="font-size:10pt; color:black; font-family:Arial">省{$save}</span>
+			<span style="color: #a41101;font-family: Arial;font-size: 24px;font-weight: bold;">{$sell}</span> <span style="font-size:10pt; color:black; font-family:Arial">省{$save}</span>
 EOD;
 	}
 	else{
 		$price_info = <<<EOD
-			<span style="font-size:20pt; color:red; font-family:Arial">{$data['price_info']}</span>
+			<span style="color: #a41101;font-family: Arial;font-size: 24px;font-weight: bold;">{$data['price_info']}</span>
 EOD;
 	}
 }
@@ -1164,30 +1170,30 @@ EOD;
 			$WEB_CONTENT .= <<<EOD
 				<tr>
 					<td align='center' style="padding-top:12px">
-						<table width="620" height="242" cellpadding="0" cellspacing="0" border=0 align='center'>
-							<tr><td align='left'><div style='text-align:left; line-height:22px; color:black'><font style="color:#F74521">【{$data['Name']}】</font>{$data['Description']}</div></td>
+						<table width="720" height="242" cellpadding="0" cellspacing="0" border=0 align='center'>
+							<tr><td align='left'><div class="in-h1"><font style="color:#F74521">【{$data['Name']}】</font>{$data['Description']}</div></td>
 							</tr>
 							<tr>
 								<td>
 
-									<table border=0 cellpadding="0" cellspacing="0" width="620">
+									<table border=0 cellpadding="0" cellspacing="0" width="720">
 										<tr>
-											<td align='left' style="padding-top:12px; width:396px" valign="top">
-											<div class="j j_Slide loading">
+											<td align='left' style="width:396px" valign="top">
+											<div class="j j_Slide loading" style="margin-left:-40px;">
 												<ol class="tb-slide-list">{$photos}</ol>
 											</div><!--div style="height:248px; width:396px; overflow:hidden;border:solid 1px #99CCFF"><img src="./upload/{$data['Photo']}" border='0' style="height:248px; width:396px; "></div-->
 											</td>
-											<td align='right' style="padding-top:12px;width:200px;" valign="top">
-												<table cellpadding="0" cellspacing="0" border="0" align='right'>
+											<td align='right' style="width:200px;" valign="top">
+												<table cellpadding="0" cellspacing="0" border="0" align='right' width="290px">
 													<tr>
 														<td style="width:200px; text-align:center; vertical-align:bottom" valign="bottom">
-															<table align="center" width="100%" cellpadding="0" cellspacing="0" style="border:solid 5px #99CCFF">
+															<table align="center" width="100%" cellpadding="0" cellspacing="0" style="padding:0px;" id="service-in-price-wrap">
 																<tr style="height:40px">
 																	<td>{$price_info}</td>
 																</tR>
 																<tr style="height:47px">{$buy_btn}</tr>
 																<tr style="height:55px">
-																	<td style="font-size:14px; height:47px; text-align:left; padding:5px" align="left">{$buy_info}</td>
+																	<td style="font-size:14px; height:47px; text-align:center; padding:5px" align="left">{$buy_info}</td>
 																</tr>
 															</table>
 														</td>
@@ -1249,7 +1255,7 @@ EOD;
 							</tr>{$share}{$activity}{$coupon}{$special}
 							<tr style="height:22px"></tr>
 							<tr>
-								<td style="cursor:pointer;text-align:left; background:url('./images/green_bar_down.gif'); background-repeat:no-repeat; background-position:center center; height:40px; width:612px; padding-left:10px; font-size:16pt; font-weight:bold" onClick="Switch('1');" align='left' id="b1">服務&資訊說明</td>
+								<td style="cursor:pointer;text-align:left; background:url('./images/global_navi-bg.jpg'); background-repeat:no-repeat; background-position:center center; height:40px; width:612px; padding-left:10px; font-size:16pt; font-weight:bold" onClick="Switch('1');" align='left' id="b1">服務&資訊說明<span class="arrow down"></span></td>
 							</tr>
 							<tr>
 								<td><div id="p1" style="display:none; text-align:left; padding-left:10px; padding-top:10px; height:500px; overflow:auto; border-left:solid 1px #EFEFE7; border-bottom:solid 1px #EFEFE7; border-right:solid 1px #EFEFE7" align='left' onMouseOver="pauseDiv()" onMouseOut="resumeDiv()">
@@ -1259,7 +1265,7 @@ EOD;
 							</tr>
 							<tr style="height:22px"></tr>
 							<tr>
-								<td style="cursor:pointer;text-align:left; background:url('./images/green_bar_down.gif'); background-repeat:no-repeat; background-position:center center; height:40px; width:612px; padding-left:10px; font-size:16pt; font-weight:bold" onClick="Switch('2');" align='left' id="b2">{$seller1}({$holder})資訊</td>
+								<td style="cursor:pointer;text-align:left; background:url('./images/global_navi-bg.jpg'); background-repeat:no-repeat; background-position:center center; height:40px; width:612px; padding-left:10px; font-size:16pt; font-weight:bold" onClick="Switch('2');" align='left' id="b2">{$seller1}({$holder})資訊<span class="arrow down"></span></td>
 							</tr>
 							<tr>
 								<td id="p2" style="display:none; text-align:left; padding-left:10px; padding-top:10px" align='left'><table>{$activity_holder}{$info}</table>
@@ -1389,7 +1395,7 @@ function resumeDiv() {
 	function Switch(x){
 		counts[x] ++;
 		$('#p'+x).toggle();
-		$('#b'+x).css({background: "url('./images/green_bar_" + ((counts[x] % 2 == 1) ? "up" : "down") + ".gif')"});
+		$('#b'+x+" .arrow").css({background: "url('./images/service-in-join-btn-" + ((counts[x] % 2 == 1) ? "2" : "1") + ".png')"});
 		if(x=="1" && counts[x] % 2 == 1){
 
 		}
@@ -1476,7 +1482,7 @@ function resumeDiv() {
 	}
 </script>
 <script language="javascript">
-parent.setTab(4);
+//parent.setTab(4);
 scrollDiv_init();
 
 </script><script type="text/javascript">

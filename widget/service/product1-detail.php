@@ -999,13 +999,13 @@ EOD;
 			$WEB_CONTENT .= <<<EOD
 				<tr>
 					<td align='center' style="padding-top:12px">
-						<table width="620" height="242" cellpadding="0" cellspacing="0" border=0 align='center'>
+						<table width="720" height="242" cellpadding="0" cellspacing="0" border=0 align='center'>
 							<tr><td align='left'><div style='text-align:left; line-height:22px; color:black'><font style="color:#F74521">【{$data['Name']}】</font>{$data['Description']}</div></td>
 							</tr>
 							<tr>
 								<td>
 
-									<table border=0 cellpadding="0" cellspacing="0" width="620">
+									<table border=0 cellpadding="0" cellspacing="0" width="720">
 										<tr>
 											<td align='left' style="padding-top:12px; width:396px" valign="top">
 											<div class="j j_Slide loading">
