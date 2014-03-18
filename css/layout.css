@@ -1576,5 +1576,7 @@ ul#global_navi li.expandable span a{
 	right:20px;
 	bottom:15px;
 }
-
+.TabbedPanelsContentIn{
+	height: 120px;
+}
 

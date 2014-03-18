@@ -12,6 +12,7 @@ $sql = "SELECT * FROM AD2 WHERE 1=1";
 $sql .= ((substr($usefor, 0, 7) == "PRODUCT") ? " AND useFor='$usefor'" : "");
 $sql .= (($_REQUEST['catalog'] != "") ? " AND Catalog = '" . $_REQUEST['catalog'] . "'" : "");
 $sql .= " AND (Member=0 OR (Member > 0 AND dateExpire > CURRENT_TIMESTAMP)) order by dateSubmit DESC, Sort";
+//echo $sql;
 $result = mysql_query($sql);
 $ad2 = "<table width='670' align='center' cellpadding='0' cellspacing='0' border=0>\n";
 $ad2 .= "<tr>\n";
@@ -65,7 +66,7 @@ switch(substr($usefor, 7, 1)){
 }
 $sql .= (($_REQUEST['catalog'] != "") ? " AND Product.Catalog = '" . $_REQUEST['catalog'] . "'" : "");
 $sql .= " ORDER BY Product.Price1 DESC, Member.Level DESC LIMIT $limit";
-//echo $sql;
+
 $result = mysql_query($sql);
 while($rs = mysql_fetch_array($result)){
 	$discount = (float)(number_format($rs['Discount'],1));

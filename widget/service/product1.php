@@ -42,7 +42,9 @@ $sql .= (($catalog!="") ? " AND Catalog = '$catalog'" : "");
 
 
 $sql .= " ORDER BY " .(($_SESSION['Latitude'] > 0 && $_SESSION['Longitude'] > 0) ? "KM, Level DESC, dateUpdate DESC" : "Level DESC, dateUpdate DESC");
-//echo $sql;
+
+// echo $sql;
+
 $result = mysql_query($sql) or die(mysql_error());
 $num = mysql_num_rows($result);
 $pagesize  = 10;
