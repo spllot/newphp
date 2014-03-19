@@ -374,7 +374,7 @@
 	width:720px;
 	height:262px;
 	overflow:hidden;
-	background:url(../images/service-products-bg-1.gif);
+	background:url(../images/service-products-bg-1.gif) no-repeat;
 	margin-top: 30px;
 }
 .product-title{

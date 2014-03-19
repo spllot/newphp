@@ -16,7 +16,7 @@ $email = $_REQUEST['email'];
 	</tr>
 	<tr>
 		<td style="line-height:25px">
-請至信箱<font color=blue>（{$email}）</font>收取會員確認信，<br>
+請至信箱<font color=blue>（<?=$email?>）</font>收取會員確認信，<br>
 點選確認信後，您的帳號始得生效。
 		</td>
 	</tr>

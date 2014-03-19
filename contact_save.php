@@ -19,7 +19,7 @@ if($catalog != "" && $name != "" && $email != ""){
 	$sql = "INSERT INTO Contact(Catalog, Name, EMail, Content, Intro, Contact, Phone, dateSubmited, ipSubmited) VALUES ('$catalog', '$name', '$email', '$content', '$intro', '$contact', '$phone', CURRENT_TIMESTAMP, '$ip')";
 	mysql_query($sql) or die (mysql_error());
 	JavaScript::Alert("謝謝您，我們會盡快為您處理!");
-	JavaScript::setURL("contact.php" ,"window.parent");
+	JavaScript::setURL("member_contact.php" ,"window.parent");
 	include './include/db_close.php';
 }
 else{

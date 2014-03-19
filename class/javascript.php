@@ -1,20 +1,20 @@
 <?php
 class JavaScript{
-	function setCharset($new_charset){
+	public static function setCharset($new_charset){
 		echo "<META http-equiv=\"Content-Type\" content=\"text/html; charset=" . $new_charset . "\">";
 	}
 
-	function loadEditor(){
+	public static function loadEditor(){
 		JavaScript::loadEditor2("../js/");
 	}
 
-    function genEditor($new_field){
+    public static function genEditor($new_field){
         echo JavaScript::getStartTag();
         echo "editor_generate('$new_field');\n";
         echo JavaScript::getEndTag();
     }//getEditor
 	
-	function loadEditor2($path){
+	public static function loadEditor2($path){
         echo "<script language=\"Javascript1.2\">\n";
         echo "  _editor_url = \"$path\";\n";
         echo "	var win_ie_ver = parseFloat(navigator.appVersion.split(\"MSIE\")[1]);\n";
@@ -37,32 +37,32 @@ class JavaScript{
         echo "</script>\n";
     }//loadEditor
 
-    function addSource($new_file){
+    public static function addSource($new_file){
         echo "<script language=\"javascript\" src=\"$new_file\"></script>";
     }//addSource
 
-    function getStartTag(){
+    public static function getStartTag(){
         return "<script language=\"javascript\">\n";
     }//getStartTag
 
-    function getEndTag(){
+    public static function getEndTag(){
         return "</script>\n";
     }//getEndTag
 
 
-    function Redirect($new_url){
+    public static function Redirect($new_url){
         echo JavaScript::getStartTag();
         echo "window.location.href='$new_url';\n";
         echo JavaScript::getEndTag();
     }//Redirect
 
-    function Execute($new_fun){
+    public static function Execute($new_fun){
         echo JavaScript::getStartTag();
         echo "$new_fun;\n";
         echo JavaScript::getEndTag();
     }//Execute
     
-    function Reload($new_win){
+    public static function Reload($new_win){
         echo JavaScript::getStartTag();
         echo "if ($new_win){\n";
         echo "  $new_win.location.reload();\n";
@@ -70,13 +70,13 @@ class JavaScript{
         echo JavaScript::getEndTag();
     }//Reload
 
-    function setImage($new_image, $new_src){
+    public static function setImage($new_image, $new_src){
         echo JavaScript::getStartTag();
         echo "document['$new_image'].src = '$new_src';\n";
         echo JavaScript::getEndTag();
     }
     
-    function setURL($new_url, $new_window){
+    public static function setURL($new_url, $new_window){
         echo JavaScript::getStartTag();
         echo "if (" . $new_window . "){\n";
         echo $new_window . ".location.href='$new_url';\n";
@@ -84,13 +84,13 @@ class JavaScript{
         echo JavaScript::getEndTag();
     }//setURL
 
-    function Alert($new_message){
+    public static function Alert($new_message){
         echo JavaScript::getStartTag();
         echo "alert('$new_message');\n";
         echo JavaScript::getEndTag();
     }//Alert
 
-    function setValue($new_field, $new_value){
+    public static function setValue($new_field, $new_value){
         echo JavaScript::getStartTag();
 		echo "if(" . $new_field . "){\n";
         echo $new_field . ".value = \"" . $new_value . "\";\n";
@@ -98,7 +98,7 @@ class JavaScript{
         echo JavaScript::getEndTag();
     }//SetValue
 
-    function setRadio($new_field, $new_index){
+    public static function setRadio($new_field, $new_index){
 		if($new_index == ""){$new_index = "0";}
        echo JavaScript::getStartTag();
        echo "if(" . $new_field . "){\n";
@@ -112,37 +112,37 @@ class JavaScript{
        echo JavaScript::getEndTag();
     }//setRadio
 
-    function setRadioValue($new_field, $new_value){
+    public static function setRadioValue($new_field, $new_value){
         echo JavaScript::getStartTag();
 
         echo JavaScript::getEndTag();
     }//setRadioValue
 
-    function setCheckBox($new_field, $new_list){
+    public static function setCheckBox($new_field, $new_list){
         echo JavaScript::getStartTag();
 
         echo JavaScript::getEndTag();
     }//setCheckBox
 
-    function setCheckBoxValue(){
+    public static function setCheckBoxValue(){
         echo JavaScript::getStartTag();
 
         echo JavaScript::getEndTag();
     }//setCheckBoxValue
 
-    function setTextarea($new_field, $new_value){
+    public static function setTextarea($new_field, $new_value){
         echo JavaScript::getStartTag();
         echo $new_field . ".value = \"" . str_replace("\n", "\\n", $new_value) . "\";\n";
         echo JavaScript::getEndTag();
     }//setTextarea
 
-	function setDiv($new_id, $new_value){
+	public static function setDiv($new_id, $new_value){
         echo JavaScript::getStartTag();
         echo "document.getElementById('" . $new_id . "').innerHTML = \"" . str_replace("\r\n", "\\n", $new_value) . "\";\n";
         echo JavaScript::getEndTag();
 	}
 
-    function addCombo($new_field, $new_value, $new_text){
+    public static function addCombo($new_field, $new_value, $new_text){
         echo JavaScript::getStartTag();
         echo $new_field . ".options.length++;\n";
         echo $new_field . ".options[" . $new_field . ".options.length - 1].value = \"" . $new_value . "\";\n";
@@ -150,24 +150,24 @@ class JavaScript{
         echo JavaScript::getEndTag();
     }//addCombo
 
-    function setDisabled($new_field){
+    public static function setDisabled($new_field){
         echo JavaScript::getStartTag();
         echo $new_field . ".disabled = true;\n";
         echo JavaScript::getEndTag();
     }//setDisabled
 
-	function ajaxError($new_msg){
+	public static function ajaxError($new_msg){
         echo JavaScript::getStartTag();
 		echo "Element.update('error', '$new_msg');\n";
         echo JavaScript::getEndTag();
 	}
 
-	function ajaxUpdateDiv($new_div, $new_text){
+	public static function ajaxUpdateDiv($new_div, $new_text){
         echo JavaScript::getStartTag();
 		echo "Element.update(\"$new_div\", \"" . str_replace("\r\n", "\\n", addslashes($new_text)) . "\");\n";
         echo JavaScript::getEndTag();
 	}
-	function ajaxUpdate($new_div, $new_target, $new_method, $new_parameter){
+	public static function ajaxUpdate($new_div, $new_target, $new_method, $new_parameter){
         echo JavaScript::getStartTag();
         echo "var ajax = new Ajax.Updater('$new_div', '$new_target', {method: '$new_method', parameters: '$new_parameter', evalScripts:true});\n";
         echo JavaScript::getEndTag();

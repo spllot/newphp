@@ -175,7 +175,7 @@ EOD;
 			if($data['Price'] == $data['Price1']){
 				$price = "- -";
 				$save = "- -";
-				$discount = "<span style='color:red; font-size:40px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>- -</span><span style='color:red; font-size:16px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>折</span>";
+				$discount = "<span style=' font-size:20px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>- -</span><span style='font-size:20px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>折</span>";
 			}
 
 			$price_decoration = "line-through";
@@ -183,7 +183,7 @@ EOD;
 				$price = "- -";
 				$save = "- -";
 				$price_decoration="none";
-				$discount = "<span style='color:red; font-size:40px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>--</span> <span style='font-size:20px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>折</span>";
+				$discount = "<span style='font-size:20px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>--</span> <span style='font-size:20px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>折</span>";
 			}
 
 			if($data['Transport'] == 1){
@@ -220,7 +220,7 @@ EOD;
 
 
 			$price_info = <<<EOD
-						<table>
+						<table style="border: 0px solid green;margin-top: -13px;margin-left: -18px;">
 							<td style="width:33px; height:54px; text-align:center"><img src="./images/price.png"></td>
 							<td><div style="width:165px; height:54px; overflow:hidden">{$price_info}</div></td>
 						</table>

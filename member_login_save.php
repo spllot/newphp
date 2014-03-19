@@ -6,7 +6,7 @@ JavaScript::setCharset("UTF-8");
 $userid = $_REQUEST['email'];
 $userpass = $_REQUEST['pass1'];
 $captcha = $_REQUEST['captcha'];
-$url = (($_REQUEST['url'] != "") ? $_REQUEST['url'] : "product4.php");
+$url = (($_REQUEST['url'] != "") ? $_REQUEST['url'] : "service_product4.php?tab=all");
 
 
 if($userid != "" && $userpass != "" && $captcha != ""){

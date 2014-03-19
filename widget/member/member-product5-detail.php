@@ -27,7 +27,6 @@ function fetchUrl($url){
 
 
 
-
 $sql = "SELECT SUM(Rating) AS R, Count(*) AS C FROM logComment WHERE Question=0 AND transactionNo = '$no'";
 $result = mysql_query($sql) or die(mysql_error());
 $av=0;
@@ -36,6 +35,7 @@ if($rs=mysql_fetch_array($result)){
 		$av = number_format(round($rs['R']/$rs['C'], 1), 1);
 	}
 }
+
 
 
 
@@ -63,6 +63,7 @@ while($rs = mysql_fetch_array($result)){
 				<td></td>
 				<td style="text-align:center; font-size:12px">{$datereply}</td>
 			</tr>
+			<tr style="height:11px"></tr>
 EOD;
 	}
 	else{
@@ -75,6 +76,7 @@ EOD;
 				<td style="color:#E7711B; text-align:center">{$rat}&nbsp;&nbsp;<img src='./images/{$start}'></td>
 				<td style="text-align:center; font-size:12px">{$rs['dateRated']}</td>
 			</tr>
+			<tr style="height:11px"></tr>
 EOD;
 	}
 	$i++;
@@ -84,21 +86,19 @@ EOD;
 }
 	if(mysql_num_rows($result) > 3){
 		$rating .= <<<EOD
-			<tr><td colspan="4" align="right"><a href="javascript:parent.Dialog('comment_more.php?product={$rs['transactionNo']}');">more></a></td></tr>
+			<tr><td colspan="4" align="right"><a href="javascript:Dialog('comment_more.php?product={$rs['transactionNo']}');">more></a></td></tr>
 EOD;
 	}
 
-$sql = "SELECT *, (SELECT Status2 FROM Member WHERE No=Product.Member) AS Status2, IFNULL((SELECT SUM(Amount) FROM Orders WHERE Product='$no' AND Member='" . $_SESSION['member']['No'] . "'), 0) AS Amounts, IFNULL((SELECT COUNT(*) FROM Orders WHERE Product='$no' AND Member='" . $_SESSION['member']['No'] . "'), 0) AS Buy, IFNULL((SELECT COUNT(*) FROM logCoupon INNER JOIN Coupon ON Coupon.No=logCoupon.couponNo WHERE logCoupon.Product=Product.No), 0) AS Coupon, IFNULL((SELECT COUNT(*) FROM Orders WHERE Orders.Product=Product.No), 0) AS Sold, IFNULL((SELECT SUM(Amount) FROM Orders WHERE Orders.Product=Product.No), 0) AS Solds, IFNULL((SELECT COUNT(*) FROM logActivity WHERE logActivity.Product=Product.No), 0) AS Joins, IFNULL((SELECT count(*) FROM Coupon WHERE Status = 1 AND Product=Product.No), 10000) AS coupon_used, (SELECT Name FROM Catalog WHERE Catalog.No = (SELECT Area1 FROM Member WHERE No=Product.Member)) AS Area1, (SELECT Address1 FROM Member WHERE No = Product.Member) AS Address1, (SELECT Latitude1 FROM Member WHERE No = Product.Member) AS M1, IF((SELECT Latitude1 FROM Member WHERE No = Product.Member) > 0, (SELECT Latitude1 FROM Member WHERE No = Product.Member), Product.Latitude) AS L1, IF((SELECT Longitude1 FROM Member WHERE No = Product.Member) > 0,(SELECT Longitude1 FROM Member WHERE No = Product.Member), Product.Longitude) AS L2, IFNULL((SELECT SUM(Quality) FROM logRating WHERE Owner = Product.Member), 0) as Rate, (SELECT Nick FROM Member WHERE Member.No = Product.Member) AS userName, (SELECT Name FROM Catalog WHERE Catalog.No = Product.Area) AS City, getDistance(IF((SELECT Latitude1 FROM Member WHERE No = Product.Member) > 0, (SELECT Latitude1 FROM Member WHERE No = Product.Member), Product.Latitude), IF((SELECT Longitude1 FROM Member WHERE No = Product.Member) > 0,(SELECT Longitude1 FROM Member WHERE No = Product.Member), Product.Longitude), '" . $_SESSION['Latitude'] . "', '" . $_SESSION['Longitude'] . "') AS KM FROM Product WHERE Status = 2 AND Mode = 2 AND Deliver = 1 AND dateClose >= CURRENT_TIMESTAMP AND No = '$no' ORDER BY KM";
+$sql = "SELECT *, IFNULL((SELECT SUM(Amount) FROM Orders WHERE Product='$no' AND Member='" . $_SESSION['member']['No'] . "'), 0) AS Amounts, IFNULL((SELECT COUNT(*) FROM Orders WHERE Product='$no' AND Member='" . $_SESSION['member']['No'] . "'), 0) AS Buy, IFNULL((SELECT COUNT(*) FROM logCoupon INNER JOIN Coupon ON Coupon.No=logCoupon.couponNo WHERE logCoupon.Product=Product.No), 0) AS Coupon, IFNULL((SELECT COUNT(*) FROM Orders WHERE Orders.Product=Product.No), 0) AS Sold, IFNULL((SELECT SUM(Amount) FROM Orders WHERE Orders.Product=Product.No), 0) AS Solds, IFNULL((SELECT COUNT(*) FROM logActivity WHERE logActivity.Product=Product.No), 0) AS Joins, IFNULL((SELECT count(*) FROM Coupon WHERE Status = 1 AND Product=Product.No), 10000) AS coupon_used, (SELECT Name FROM Catalog WHERE Catalog.No = (SELECT Area1 FROM Member WHERE No=Product.Member)) AS Area1, (SELECT Address1 FROM Member WHERE No = Product.Member) AS Address1, (SELECT Latitude1 FROM Member WHERE No = Product.Member) AS M1, IF((SELECT Latitude1 FROM Member WHERE No = Product.Member) > 0, (SELECT Latitude1 FROM Member WHERE No = Product.Member), Product.Latitude) AS L1, IF((SELECT Longitude1 FROM Member WHERE No = Product.Member) > 0,(SELECT Longitude1 FROM Member WHERE No = Product.Member), Product.Longitude) AS L2, IFNULL((SELECT SUM(Quality) FROM logRating WHERE Owner = Product.Member), 0) as Rate, (SELECT Nick FROM Member WHERE Member.No = Product.Member) AS userName, (SELECT Name FROM Catalog WHERE Catalog.No = Product.Area) AS City, getDistance(IF((SELECT Latitude1 FROM Member WHERE No = Product.Member) > 0, (SELECT Latitude1 FROM Member WHERE No = Product.Member), Product.Latitude), IF((SELECT Longitude1 FROM Member WHERE No = Product.Member) > 0,(SELECT Longitude1 FROM Member WHERE No = Product.Member), Product.Longitude), '" . $_SESSION['Latitude'] . "', '" . $_SESSION['Longitude'] . "') AS KM FROM Product WHERE Status = 2 AND Mode = 2 AND Deliver = 1 AND dateClose >= CURRENT_TIMESTAMP AND No = '$no' ORDER BY KM";
 $result = mysql_query($sql) or die(mysql_error());
 $num = mysql_num_rows($result);
 $data = mysql_fetch_array($result);
 //if($data['Activity'] == 1){$data['Price1'] =0;}
-			if($data['Transport'] == 1){
-				$discount = (($data['taxi_discount']) ? "{$data['taxi_discount']}折":"");
-			}
-			else{
+
+
 				if($data['price_mode'] == 1){
-					$discount = "- -折";
+					$discount = "折扣 --";
 				}
 				else{
 					$discount = (float)(number_format(($data['Price1'] / $data['Price'])*10,1));
@@ -117,7 +117,7 @@ $data = mysql_fetch_array($result);
 						$discount = $discount . "折";
 					}
 				}
-			}
+
 $fb_title = "【{$data['Name']}】{$discount}";
 $fb_desc = $data['Description'];
 $fb_thumb = "http://{$WEB_HOST}/upload/{$data['Photo']}";
@@ -175,19 +175,19 @@ div.fb_dialog_advanced+div.fb_dialog_advanced {
 			if($(this).css("top")!='-10000px')
 			{
 				$(this).css("top", '50px' );
-				window.parent.document.body.scrollTop = 0;
-				window.parent.document.documentElement.scrollTop = 0;
+				window.document.body.scrollTop = 0;
+				window.document.documentElement.scrollTop = 0;
 			}
 		});
 		setTimeout( ('move_to_top("'+value+'");'), 1250);
 	}
 	
 	function postToFeed() {
-		var caption = encodeURI("http://{$WEB_HOST}/service_product5_detail.php?no={$no}") ;
+		var caption = encodeURI("http://{$WEB_HOST}/product5_detail.php?no={$no}") ;
 
         var obj = {
 			method: 'feed',
-			link: 'http://{$WEB_HOST}/service_product5_detail.php?no={$no}',
+			link: 'http://{$WEB_HOST}/product5_detail.php?no={$no}',
             picture: '{$fb_thumb}',
             name: '{$fb_title}',
 //            caption: caption,
@@ -197,8 +197,8 @@ div.fb_dialog_advanced+div.fb_dialog_advanced {
         function callback(response) {
 //			$("#activity").load("facebook_activity.php?no={$no}&time=" + Math.floor(Math.random()*11));
 //			checkStep('{$no}');
-			window.parent.document.body.scrollTop = 0;
-			window.parent.document.documentElement.scrollTop = 0;
+			window.document.body.scrollTop = 0;
+			window.document.documentElement.scrollTop = 0;
 			if(response){
 				$.post(
 					'fackbook_share.php',
@@ -249,7 +249,6 @@ div.fb_dialog_advanced+div.fb_dialog_advanced {
 EOD;
 if ($num>0){
 		if($data){
-			$discount = "折扣 --";
 			$activity_join = "N.A.";
 			$activity_ratio = "N.A.";
 			$activity_timer = "N.A.";
@@ -257,9 +256,9 @@ if ($num>0){
 			$activity_join = "已售 --";
 			$activity_timer = "--時--分--秒";
 			$receipt = array("", "可以提供發票", "可以提供收據", "都無法提供");
+			$price = "$" . ($data['Price']);
 			$price = (($data['Price'] > 0) ? "$" . ($data['Price']) : " --");
 			$sell = "$" . ($data['Price1']);
-			$price = (($data['Price'] > 0) ? "$" . ($data['Price']) : " --");
 			$save = "$" . ($data['Price'] - $data['Price1']);
 
 			$dis = (($data['Latitude'] > 0) ? "距離：{$data['KM']}公里" : "");
@@ -342,16 +341,13 @@ EOD;
 			if($data['Activity'] == 1){
 				$holder="商家";
 			}
-			$buy_info = "購買詳情請參考<以下之說明介紹";
-			$photos = '<li class="service-in-pic" style="margin-top:-13px;><img alt="吉達資訊圖片輪播一" src="./upload/' . $data['Photo'] . '" style="width:396px; height:248px"></li>';
-			$photos .= (($data['Slide'] == 1 && $data['Slide2'] != "") ? '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播二" src="' . $data['Slide2'] . '" style="width:396px; height:248px"></li>' : "");
-			$photos .= (($data['Slide'] == 1 && $data['Slide3'] != "") ? '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播三" src="' . $data['Slide3'] . '" style="width:396px; height:248px"></li>' : "");
-			$photos .= (($data['Slide'] == 1 && $data['Slide4'] != "") ? '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播四" src="' . $data['Slide4'] . '" style="width:396px; height:248px"></li>' : "");
+			$buy_info = "購買詳情請參考以下之說明介紹";
+			$photos = '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播一" src="./upload/' . $data['Photo'] . '" style="width:396px; height:248px"></li>';
+			$photos .= (($data['Slide'] == 1 && $data['Slide2'] != "") ? '<li class="service-in-pic"><img alt="吉達資訊圖片輪播二" src="' . $data['Slide2'] . '" style="width:396px; height:248px"></li>' : "");
+			$photos .= (($data['Slide'] == 1 && $data['Slide3'] != "") ? '<li class="service-in-pic"><img alt="吉達資訊圖片輪播三" src="' . $data['Slide3'] . '" style="width:396px; height:248px"></li>' : "");
+			$photos .= (($data['Slide'] == 1 && $data['Slide4'] != "") ? '<li class="service-in-pic"><img alt="吉達資訊圖片輪播四" src="' . $data['Slide4'] . '" style="width:396px; height:248px"></li>' : "");
 
-			if($data['Transport'] == 1){
-				$discount = (($data['taxi_discount']) ? "{$data['taxi_discount']}折":"");
-			}
-			else{
+
 				if($data['price_mode'] == 1){
 					$discount = "折扣 --";
 				}
@@ -372,11 +368,8 @@ EOD;
 						$discount = $discount . "折";
 					}
 				}
-			}
-			
-			
-			$c_url = "<a href=\"javascript:parent.Dialog2('comment.php?product={$data['No']}');\">";
-			$q_url = "<a href=\"javascript:parent.Dialog2('question.php?product={$data['No']}');\">";
+			$c_url = "<a href=\"javascript:Dialog2('comment.php?product={$data['No']}');\">";
+			$q_url = "<a href=\"javascript:Dialog2('question.php?product={$data['No']}');\">";
 			if(empty($_SESSION['member'])){
 				$c_url = "<a href=\"member_login.php?url=" . urlencode($_SERVER['PHP_SELF'] . "?no={$data['No']}&area=$area&type={$_REQUEST['type']}&catalog={$_REQUEST['catalog']}") . "\">";
 				$q_url = "<a href=\"member_login.php?url=" . urlencode($_SERVER['PHP_SELF'] . "?no={$data['No']}&area=$area&type={$_REQUEST['type']}&catalog={$_REQUEST['catalog']}") . "\">";
@@ -404,7 +397,7 @@ EOD;
 				</td>
 EOD;
 			if($data['Cashflow'] == 1){
-				$onclick = ((!empty($_SESSION['member'])) ? "parent.Dialog('buynow.php?id={$data['No']}');":"window.location.href='member_login.php?url=" . urlencode("service_product5_detail.php?no={$data['No']}") . "';");
+				$onclick = ((!empty($_SESSION['member'])) ? "Dialog('buynow.php?id={$data['No']}');":"window.location.href='member_login.php?url=" . urlencode("product5_detail.php?no={$data['No']}") . "';");
 				$onclick = ((!empty($_SESSION['member'])) ? "window.location.href='buynow.php?id={$data['No']}';":"window.location.href='member_login.php?url=" . urlencode("buynow.php?id={$data['No']}") . "';");
 				if(!empty($_SESSION['member']) && $data['Amount'] > 0){
 					$result = mysql_query("SELECT SUM(Items.Amount) FROM Items INNER JOIN Orders ON Orders.ID = Items.orderID WHERE Items.Refund=0 AND Orders.Status <> 3 AND Orders.Product='$no'") or die(mysql_error());
@@ -426,7 +419,7 @@ EOD;
 					$coupon=<<<EOD
 					<tr style="height:22px"></tr>
 					<tr>
-						<td style="cursor:pointer;text-align:left; background:url('./images/green_bar_down.gif'); background-repeat:no-repeat; background-position:center center; height:40px; width:612px; padding-left:10px; font-size:16pt; font-weight:bold" onClick="Switch('3');" align='left' id="b3">憑證使用須知</td>
+						<td style="cursor:pointer;text-align:left; background:url('./images/global_navi-bg.jpg'); background-repeat:no-repeat; background-position:center center; height:40px; width:612px; padding-left:10px; font-size:16pt; font-weight:bold" onClick="Switch('3');" align='left' id="b3">憑證使用須知</td>
 					</tr>
 					<tr>
 						<td id="p3" style="display:none; text-align:left; padding-left:10px; padding-top:10px" align='left'>
@@ -455,7 +448,7 @@ EOD;
 								</tr>
 								<tr>
 									<td style="text-align:right" nowrap valign="top">問題聯絡：</td>
-									<td style="text-align:left" valign="top">本活動相關問題，請於週一至週六 9:00AM ~ 6:00PM 致電 InTimeGo 客服(03)5904710，其他適用於所有團購的一般注意事項請參考<a href="javascript:parent.Dialog('policy.php')">電子商務服務條款</a>。
+									<td style="text-align:left" valign="top">本活動相關問題，請於週一至週六 9:00AM ~ 6:00PM 致電 InTimeGo 客服(03)5904710，其他適用於所有團購的一般注意事項請參考<a href="javascript:Dialog('policy.php')">電子商務服務條款</a>。
 									</td>
 								</tr>
 							</table>
@@ -508,7 +501,7 @@ EOD;
 					$special=<<<EOD
 					<tr style="height:22px"></tr>
 					<tr>
-						<td style="cursor:pointer;text-align:left; background:url('./images/green_bar_down.gif'); background-repeat:no-repeat; background-position:center center; height:40px; width:612px; padding-left:10px; font-size:16pt; font-weight:bold" onClick="Switch('4');" align='left' id="b4">好康特色</td>
+						<td style="cursor:pointer;text-align:left; background:url('./images/global_navi-bg.jpg'); background-repeat:no-repeat; background-position:center center; height:40px; width:612px; padding-left:10px; font-size:16pt; font-weight:bold" onClick="Switch('4');" align='left' id="b4">好康特色</td>
 					</tr>
 					<tr>
 						<td id="p4" style="display:none; text-align:left; padding-left:10px; padding-top:10px" align='left'>
@@ -527,7 +520,7 @@ EOD;
 				$buy_info = "索取詳情請參考<br>以下之說明介紹";
 				$coupon_info = str_replace("\n", "<br>", $data['coupon_info']);
 				if($coupon_quota > 0){
-					$onclick= "parent.Dialog('coupon.php?id={$data['No']}');";
+					$onclick= "Dialog('coupon.php?id={$data['No']}');";
 				}
 				else{
 					$onclick="alert('優惠憑證已發送完畢!');";
@@ -541,7 +534,7 @@ EOD;
 				$coupon=<<<EOD
 					<tr style="height:22px"></tr>
 					<tr>
-						<td style="cursor:pointer;text-align:left; background:url('./images/green_bar_down.gif'); background-repeat:no-repeat; background-position:center center; height:40px; width:612px; padding-left:10px; font-size:16pt; font-weight:bold" onClick="Switch('3');" align='left' id="b3">優惠活動說明</td>
+						<td style="cursor:pointer;text-align:left; background:url('./images/global_navi-bg.jpg'); background-repeat:no-repeat; background-position:center center; height:40px; width:612px; padding-left:10px; font-size:16pt; font-weight:bold" onClick="Switch('3');" align='left' id="b3">優惠活動說明</td>
 					</tr>
 					<tr>
 						<td id="p3" style="display:none; text-align:left; padding-left:10px; padding-top:10px" align='left'>
@@ -581,7 +574,7 @@ EOD;
 					<div style="float:left; line-height:30px">服務代碼：<font style="color:red;font-weight:bolder">{$code}</font></div>
 					<table border=0 align="right">	
 						<tr>
-							<tD><!--div class="fb-like" data-href="http://{$WEB_HOST}/service_product5_detail.php?no={$no}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div--></td>
+							<tD><!--div class="fb-like" data-href="http://{$WEB_HOST}/product5_detail.php?no={$no}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div--></td>
 							<tD>分享朋友：</td>
 							<tD><SCRIPT language=javascript> 
 				var pro_url=location.href;
@@ -589,7 +582,7 @@ EOD;
 				facebook_show_display(); 
 				</SCRIPT></td>
 							<td>　加入收藏追蹤：</td>
-							<td><img src="./images/in-use-add.gif" border="0" style="cursor:pointer" onClick="addFavorite('{$data['No']}');" title="加入收藏可以隨時隨地掌握商家位置"></td>
+							<td><img src="./images/in-use-add.gif" border="0" style="cursor:pointer" onClick="addFavorite('{$data['No']}');"></td>
 						</tr>
 					</table>
 					
@@ -601,30 +594,29 @@ EOD;
 			
 			
 			$question = <<<EOD
-				<tr style="height:22px"></tr>
 				<tr>
 					<td style="font-family: Arial,微軟正黑體;margin: 15px 0;background-color: #e5e5e5;padding: 8px 0px 8px 15px;font-size:17px;" align='left'>
 						<table cellpadding="0" cellpadding="0"><tr><td>訂閱電子報：</td><td><input type="text" style="width:470px;padding:3px;" name="email" id="email"></td><td><input type="button" value="訂閱" class="service-in-epaper-btn" onClick="Subscribe('{$data['No']}')"></td></tr></table>
 					</td>
 				</tr>
 				<tr>
-					<td  id="service-in-shop-title" style="padding-top:15px;padding-bottom:10px;">
-				<p class="in-shop-icon-1">
-				商家 {$data['userName']}</font><a href="javascript:parent.Dialog('seller_trust.php?id={$data['Member']}');">(金流交易評價：{$data['Rate']})</a>
-				</p>
-				<p class="in-shop-icon-2">
-				<a href="javascript:sellerProduct('{$data['Member']}');">商家其它服務</a>
-				</p>
-				<p class="in-shop-icon-3">	
-				{$q_url}詢問商家問題</a>
-				</p>
-				<p class="in-shop-icon-4">
-				{$c_url}發表本服務評論</a>
-				</p>
+					<td id="service-in-shop-title" style="padding-top:15px;padding-bottom:10px;">
+						<p class="in-shop-icon-1">
+							商家 {$data['userName']}</font><a href="javascript:Dialog('seller_trust.php?id={$data['Member']}');">(金流交易評價：{$data['Rate']})</a>
+						</p>
+						<p class="in-shop-icon-2">			
+							<a href="javascript:sellerProduct('{$data['Member']}');">商家其它服務</a>
+						</p>
+						<p class="in-shop-icon-3">			
+							{$q_url}詢問商家問題</a>
+						</p>
+						<p class="in-shop-icon-4">
+							{$c_url}發表本服務評論</a>
+						</p>
 					</td>
 				</tr>
 				<tr>
-					<td style="text-align:left; line-height:40px" align='left'>
+					<td style="text-align:left; line-height:40px">
 						<table cellpadding="0" cellspacing="0" border="0">
 							<tr>
 								<td><!--<img src="./images/pencil-1.png" style="height:24px">--></td>
@@ -752,21 +744,21 @@ EOD;
 					</td>
 EOD;
 
-$url = "http://{$WEB_HOST}/";//service_product5_detail.php?no={$no}"
+$url = "http://{$WEB_HOST}/";//product5_detail.php?no={$no}"
 if($data['Mode'] == 2){
 	if($data['Deliver'] == 0){
-		$url .= "service_product4_detail.php?no={$no}";
+		$url .= "product4_detail.php?no={$no}";
 	}
 	else{
-		$url .= "service_product5_detail.php?no={$no}";
+		$url .= "product5_detail.php?no={$no}";
 	}
 }
 else if($data['Mode'] == 1){
 	if($data['Deliver'] == 0){
-		$url .= "service_product1_detail.php?no={$no}";
+		$url .= "product1_detail.php?no={$no}";
 	}
 	else{
-		$url .= "service_product2_detail.php?no={$no}";
+		$url .= "product2_detail.php?no={$no}";
 	}
 }
 
@@ -907,7 +899,7 @@ EOD;
 					</tr>
 					<tr>
 						<td style="padding-top:22px;text-align:left" align='left'>
-					♦商家 {$data['userName']}</font><a href="javascript:parent.Dialog('seller_trust.php?id={$data['Member']}');">(金流交易評價：{$data['Rate']})</a>;&nbsp; 
+					♦商家 {$data['userName']}</font><a href="javascript:Dialog('seller_trust.php?id={$data['Member']}');">(金流交易評價：{$data['Rate']})</a>;&nbsp; 
 						
 					♦<a href="javascript:sellerProduct('{$data['Member']}');">商家其它服務</a>
 						
@@ -917,8 +909,8 @@ EOD;
 					<tr>
 						<td style="padding-top:22px;text-align:left">
 							<!--div style="width:612px; height:300px; overflow:auto"></div-->
-							<div class="fb-comments" data-href="http://{$WEB_HOST}/service_product5_detail.php?no={$no}" data-num-posts="3" data-width="612" data-order-by="reverse_time" reverse=1 simple=1></div>
-							<div style="text-align:right"><a href="javascript:parent.Dialog1('facebook_comment.php?no={$no}', 560);">檢視所有留言</a></div>
+							<div class="fb-comments" data-href="http://{$WEB_HOST}/product5_detail.php?no={$no}" data-num-posts="3" data-width="612" data-order-by="reverse_time" reverse=1 simple=1></div>
+							<div style="text-align:right"><a href="javascript:Dialog1('facebook_comment.php?no={$no}', 560);">檢視所有留言</a></div>
 						</td>
 					</tr>
 EOD;
@@ -973,10 +965,6 @@ EOD;
 			$save = $data['Price'] - $data['Price1'];
 			$save = "$" . (($save > 0) ? number_format($save) : " --");
 			$sell = "$" . number_format($data['Price1']);
-			if($data['Transport'] == 1){
-				$discount = (($data['taxi_discount']) ? "{$data['taxi_discount']}折":"");
-			}
-			else{
 				if($data['price_mode'] == 1){
 					$discount = "折扣 --";
 				}
@@ -997,8 +985,6 @@ EOD;
 						$discount = $discount . "折";
 					}
 				}
-			}		
-			
 			$city = "- - -";
 			$city = "宅配";
 
@@ -1037,11 +1023,11 @@ EOD;
 												<ol class="tb-slide-list">{$photos}</ol>
 											</div><!--div style="height:248px; width:396px; overflow:hidden;border:solid 1px #99CCFF"><img src="./upload/{$data['Photo']}" border='0' style="height:248px; width:396px; "></div-->
 											</td>
-											<td align='right' style="width:200px;" valign="top">
+											<td align='right' style="padding-top:12px;width:200px;" valign="top">
 												<table cellpadding="0" cellspacing="0" border="0" align='right' width="290px">
 													<tr>
-														<td style="width:200px; text-align:center; vertical-align:bottom" valign="bottom">
-															<table align="center" width="100%" cellpadding="0" cellspacing="0" style="padding:0px;" id="service-in-price-wrap">
+														<td style="text-align:center; vertical-align:bottom" valign="bottom">
+															<table align="center" width="100%" cellpadding="0" cellspacing="0" id="service-in-price-wrap">
 																<tr style="height:40px">
 																	<td>{$price_info}</td>
 																</tR>
@@ -1057,18 +1043,18 @@ EOD;
 														<td style="width:200px">
 															<table cellpadding="0" cellspacing="0" class="service-in-dec" width="100%">
 																<tr style="height:30px">
-																	<td style="background-color: #cbc9c9;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;">原價{$price}</td>
-																	<td style="background-color: #f0b3b3;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;">{$discount}</td>
+																	<td width="50%" style="background-color: #cbc9c9;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;">原價{$price}</td>
+																	<td width="50%" style="background-color: #f0b3b3;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;">{$discount}</td>
 																</tr>
 																<tr style="height:2px"></tr>
 																<tr style="height:30px">
-																	<td style="background-color: #cbc9c9;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;">{$activity_join}</td>
-																	<td style="background-color: #f0b3b3;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;">{$activity_ratio}</td>
+																	<td width="50%" style="background-color: #cbc9c9;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;">{$activity_join}</td>
+																	<td width="50%" style="background-color: #f0b3b3;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;">{$activity_ratio}</td>
 																</tr>
 																<tr style="height:2px"></tr>
 																<tr style="height:30px">
-																	<td style="background-color: #cbc9c9;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;">{$city}</td>
-																	<td style="background-color: #f0b3b3;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;"><div id="timer{$data['No']}">{$activity_timer}</div></td>
+																	<td width="50%" style="background-color: #cbc9c9;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;">{$city}</td>
+																	<td width="50%" style="background-color: #f0b3b3;border-bottom: 1px solid #FFFFFF;text-align: center;padding: 7px 5px;"><div id="timer{$data['No']};">{$activity_timer}</div></td>
 																</tr>
 															</table>{$js_count}
 														</td>
@@ -1112,7 +1098,7 @@ EOD;
 												<table align="center" width="100%" cellpadding="0" cellspacing="0">
 													<tr>
 														<td style="color:white; background:url('./images/btn_300_disabled.png'); height:47px; background-repeat:no-repeat; background-position:center center; text-align:center">
-															<span style="font-size:16pt; font-weight:bold">立即買</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:16pt">{$sell} (省{$save})</span>
+															<span style="font-size:16pt; font-weight:bold">立即買</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:12pt">單價{$sell} (省{$save})</span>
 														</td>
 													</tr>
 													<tr>
@@ -1136,7 +1122,7 @@ EOD;
 							</tr>
 							<tr style="height:22px"></tr>
 							<tr>
-								<td style="cursor:pointer;text-align:left; background:url('./images/global_navi-bg.jpg'); background-repeat:no-repeat; background-position:center center; height:40px; width:612px; padding-left:10px; font-size:16pt; font-weight:bold" onClick="Switch('2');" align='left' id="b2">{$seller1}({$holder})資訊<span class="arrow down"></span></td>
+								<td style="cursor:pointer;text-align:left; background:url('./images/global_navi-bg.jpg'); background-repeat:no-repeat; background-position:center center; height:40px; width:612px; padding-left:10px; font-size:16pt; font-weight:bold" onClick="Switch('2');" align='left' id="b2">業者({$holder})資訊<span class="arrow down"></span></td>
 							</tr>
 							<tr>
 								<td id="p2" style="display:none; text-align:left; padding-left:10px; padding-top:10px" align='left'><table>{$activity_holder}{$info}</table>
@@ -1164,7 +1150,7 @@ $usefor = basename($_SERVER['PHP_SELF']);
 str_replace("member_", "", $usefor);
 $usefor = strtoupper(substr($usefor, 0, 8));
 $catalog = $_REQUEST['catalog'];
-//include 'template0.php';
+//include 'template5.php';
 
 
 
@@ -1180,12 +1166,12 @@ $usefor = basename($_SERVER['PHP_SELF']);
 $usefor = strtoupper(substr($usefor, 0, 8));
 $catalog = $_REQUEST['catalog'];
 ?>
-<?=$WEB_CONTENT?>
-<script language="javascript">
-window.parent.document.title = "<?=$data['Name']?>";
-//parent.iAD.location.href="ad.php?usefor=<?=$usefor?>&catalog=<?=$catalog?>";
-</script>
 
+<?php
+
+echo $WEB_CONTENT;
+
+?>
 <form name="iForm" method="post" action="add_favorite.php" target="iAction">
 	<input type="hidden" name="product" value="">
 	<input type="hidden" name="email" value="">
@@ -1266,7 +1252,7 @@ function resumeDiv() {
 	function Switch(x){
 		counts[x] ++;
 		$('#p'+x).toggle();
-		$('#b'+x+" .arrow").css({background: "url('./images/service-in-join-btn-" + ((counts[x] % 2 == 1) ? "2" : "1") + ".png')"});
+		$('#b'+x).css({background: "url('./images/service-in-join-btn-" + ((counts[x] % 2 == 1) ? "2" : "1") + ".png')"});
 		if(x=="1" && counts[x] % 2 == 1){
 
 		}
@@ -1325,7 +1311,7 @@ function resumeDiv() {
 	}
 
 	function Join(xNo){
-		parent.Dialog1('facebook_join1.php?no=<?=$no?>&member=<?=$_SESSION['member']['No']?>', 450);
+		Dialog1('facebook_join1.php?no=<?=$no?>&member=<?=$_SESSION['member']['No']?>', 450);
 				/*
 		$.post(
 			'fackbook_check.php',
@@ -1354,7 +1340,7 @@ function resumeDiv() {
 	}
 </script>
 <script language="javascript">
-//parent.setTab(5);
 scrollDiv_init();
 
 </script>
+<script language="javascript">$("#userinfo").load("userinfo3.php");</script>

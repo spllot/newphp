@@ -1,24 +1,109 @@
 <?php
-include './include/session.php';
+$ip = ((getenv(HTTP_X_FORWARDED_FOR)) ?  getenv(HTTP_X_FORWARDED_FOR) :  getenv(REMOTE_ADDR));
 include './include/db_open.php';
 
-$tab= $_REQUEST['tab'];
+if(!empty($_SESSION['member']) && substr($_SESSION['member']['dateLogin'], 0, 10) != date('Y-m-d')){
+	mysql_query("UPDATE Member SET Days = Days + 1 WHERE userID = '" . $_SESSION['member']['userID'] . "'");
+    $_SESSION['member']['dateLogin'] = date('Y-m-d H:i:s');
+			mysql_query("UPDATE Member SET Level = 2 WHERE userID = '$userid' AND Days >= 15  AND Days <30");
+			mysql_query("UPDATE Member SET Level = 3 WHERE userID = '$userid' AND Days >= 30  AND Days <60");
+			mysql_query("UPDATE Member SET Level = 4 WHERE userID = '$userid' AND Days >= 60  AND Days <120");
+			mysql_query("UPDATE Member SET Level = 5 WHERE userID = '$userid' AND Days >= 120  AND Days <240");
+			mysql_query("UPDATE Member SET Level = 6 WHERE userID = '$userid' AND Days >= 240  AND Days <480");
+			mysql_query("UPDATE Member SET Level = 7 WHERE userID = '$userid' AND Days >= 480  AND Days <960");
+			mysql_query("UPDATE Member SET Level = 8 WHERE userID = '$userid' AND Days >= 960");
+	$sql = "INSERT INTO logLogin(dateLogin, userID, Status, ipLogin) VALUES (CURRENT_TIMESTAMP, '" . $_SESSION['member']['userID'] . "', '1', '$ip')";
+	mysql_query($sql) or die (mysql_error());
+}
+$result = mysql_query("SELECT * FROM Config");
+while($rs = mysql_fetch_array($result)){
+	$_CONFIG[$rs['ID']] = $rs['YN'];
+}
+
 $area=$_REQUEST['area'];
 $type=$_REQUEST['type'];
 $catalog=$_REQUEST['catalog'];
-$catalog2=isset($_REQUEST['catalog2']) ? $_REQUEST['catalog2'] : 0;
-$catalog3=isset($_REQUEST['catalog3']) ? $_REQUEST['catalog3'] : 0;
+$catalog2=$_REQUEST['catalog2'];
+$catalog3=$_REQUEST['catalog3'];
+$seller=$_REQUEST['seller'];
 
-$tmp_type = $type;
-if($type != "all"){
-	$type = $tab;
+
+switch($type){
+	case 'transfer':
+		$usefor = "TYPE_TPT";
+		break;
+	case 'hr':
+		$usefor = "TYPE_JOB";
+		break;
+	case 'event':
+		$usefor = "TYPE_ACT";
+		break;
+	default:
+		$usefor = "TYPE_PRO";
+		break;
 }
+
+
+
+
+$result = mysql_query("SELECT * FROM Catalog WHERE useFor='$usefor' AND Parent=0 ORDER BY Sort");
+$catalog_list = "";
+while($rs=mysql_fetch_array($result)){
+	$catalog_list .= "<option value='" . $rs['No'] . "'" . (($catalog == $rs["No"] ) ? " SELECTED" : "") . ">" . $rs["Name"] . "</option>";
+}
+$disabled2= " disabled";
+$disabled3= " disabled";
+if($catalog != ""){
+	$result = mysql_query("SELECT * FROM Catalog WHERE useFor='$usefor' AND Parent=$catalog ORDER BY Sort");
+	$catalog_list2 = "";
+	while($rs=mysql_fetch_array($result)){
+		$catalog_list2 .= "<option value='" . $rs['No'] . "'" . (($catalog2 == $rs["No"] ) ? " SELECTED" : "") . ">" . $rs["Name"] . "</option>";
+	}
+	$disabled2= "";
+}
+
+if($catalog2 != ""){
+	$result = mysql_query("SELECT * FROM Catalog WHERE useFor='$usefor' AND Parent=$catalog2 ORDER BY Sort");
+	$catalog_list3 = "";
+	while($rs=mysql_fetch_array($result)){
+		$catalog_list3 .= "<option value='" . $rs['No'] . "'" . (($catalog3 == $rs["No"] ) ? " SELECTED" : "") . ">" . $rs["Name"] . "</option>";
+	}
+	$disabled3= "";
+}
+
+
+
+$tab = 4;
+$result = mysql_query("SELECT * FROM Member WHERE No='$seller'") or die(mysql_error());
+$member = mysql_fetch_array($result);
+
+
+
+
+
+
+include './include/db_close.php';
+$current = basename($_SERVER['PHP_SELF']);
+
+$src_logo = (($_CONFIG['imgurl0'] != "") ? $_CONFIG['imgurl0'] : "/upload/" . $_CONFIG['logo']);
+$img_banner = (($_CONFIG['showimg1'] == "Y") ? "<img src=\"" . (($_CONFIG['imgurl1'] != "") ? $_CONFIG['imgurl1']:"/upload/" . $_CONFIG['ad_picpath1']) . "\" style=\"width:590px; height:96px\" border=0/>" : "");
+
+if($_CONFIG['link1'] != ""){
+	$img_banner = "<a href='{$_CONFIG['link1']}' target='_blank'>{$img_banner}</a>";
+}
+
+?>
+
+
+<?php
+include './include/db_open.php';
+
 
 
 $sql = "SELECT *, (SELECT Name FROM Catalog WHERE Catalog.No = (SELECT Area1 FROM Member WHERE No=Product.Member)) AS Area1, (SELECT Name FROM Catalog WHERE Catalog.No = Product.Area) AS City, getDistance(Product.Latitude, Product.Longitude, '" . $_SESSION['Latitude'] . "', '" . $_SESSION['Longitude'] . "') AS KM, (SELECT Level FROM Member WHERE Member.No = Product.Member) AS Level FROM Product WHERE Status = 2 AND Mode = 2 AND Deliver = 0 AND dateClose >= CURRENT_TIMESTAMP";
 
 
-$sql = "SELECT *, (SELECT Status2 FROM Member WHERE No=Product.Member) AS Status2, (SELECT Name FROM Catalog WHERE No=Product.Type) AS TName, (SELECT Name FROM Catalog WHERE No=Product.Catalog) AS CName, (SELECT Nick FROM Member WHERE No=Product.Member) AS Nick, IFNULL((SELECT COUNT(*) FROM logCoupon INNER JOIN Coupon ON Coupon.No=logCoupon.couponNo WHERE logCoupon.Product=Product.No), 0) AS Coupon, IFNULL((SELECT COUNT(*) FROM Orders WHERE Orders.Product=Product.No), 0) AS Sold, IFNULL((SELECT SUM(Amount) FROM Orders WHERE Orders.Product=Product.No), 0) AS Solds, IFNULL((SELECT COUNT(*) FROM logActivity WHERE logActivity.Product=Product.No), 0) AS Joins, (SELECT Name FROM Catalog WHERE Catalog.No = (SELECT Area1 FROM Member WHERE No=Product.Member)) AS Area1, (SELECT Latitude1 FROM Member WHERE No = Product.Member) AS M1, IF((SELECT Latitude1 FROM Member WHERE No = Product.Member) > 0, (SELECT Latitude1 FROM Member WHERE No = Product.Member), Product.Latitude) AS L1, IF((SELECT Longitude1 FROM Member WHERE No = Product.Member) > 0,(SELECT Longitude1 FROM Member WHERE No = Product.Member), Product.Longitude) AS L2, (SELECT Name FROM Catalog WHERE Catalog.No = Product.Area) AS City, getDistance(IF((SELECT Latitude1 FROM Member WHERE No = Product.Member) > 0, (SELECT Latitude1 FROM Member WHERE No = Product.Member), Product.Latitude), IF((SELECT Longitude1 FROM Member WHERE No = Product.Member) > 0,(SELECT Longitude1 FROM Member WHERE No = Product.Member), Product.Longitude), '" . $_SESSION['Latitude'] . "', '" . $_SESSION['Longitude'] . "') AS KM, (SELECT Level FROM Member WHERE Member.No = Product.Member) AS Level FROM Product WHERE Status = 2 AND Mode = 1 AND Deliver = 0 AND dateClose >= CURRENT_TIMESTAMP";
+$sql = "SELECT *, (SELECT Name FROM Catalog WHERE No=Product.Type) AS TName, (SELECT Name FROM Catalog WHERE No=Product.Catalog) AS CName, IFNULL((SELECT COUNT(*) FROM logCoupon INNER JOIN Coupon ON Coupon.No=logCoupon.couponNo WHERE logCoupon.Product=Product.No), 0) AS Coupon, IFNULL((SELECT COUNT(*) FROM Orders WHERE Orders.Product=Product.No), 0) AS Sold, IFNULL((SELECT SUM(Amount) FROM Orders WHERE Orders.Product=Product.No), 0) AS Solds, IFNULL((SELECT COUNT(*) FROM logActivity WHERE logActivity.Product=Product.No), 0) AS Joins, (SELECT Name FROM Catalog WHERE Catalog.No = (SELECT Area1 FROM Member WHERE No=Product.Member)) AS Area1, (SELECT Latitude1 FROM Member WHERE No = Product.Member) AS M1, IF((SELECT Latitude1 FROM Member WHERE No = Product.Member) > 0, (SELECT Latitude1 FROM Member WHERE No = Product.Member), Product.Latitude) AS L1, IF((SELECT Longitude1 FROM Member WHERE No = Product.Member) > 0,(SELECT Longitude1 FROM Member WHERE No = Product.Member), Product.Longitude) AS L2, (SELECT Name FROM Catalog WHERE Catalog.No = Product.Area) AS City, getDistance(IF((SELECT Latitude1 FROM Member WHERE No = Product.Member) > 0, (SELECT Latitude1 FROM Member WHERE No = Product.Member), Product.Latitude), IF((SELECT Longitude1 FROM Member WHERE No = Product.Member) > 0,(SELECT Longitude1 FROM Member WHERE No = Product.Member), Product.Longitude), '" . $_SESSION['Latitude'] . "', '" . $_SESSION['Longitude'] . "') AS KM, (SELECT Level FROM Member WHERE Member.No = Product.Member) AS Level FROM Product WHERE Status = 2 AND Mode = 1 AND Deliver = 0 AND dateClose >= CURRENT_TIMESTAMP AND Member='$seller'";
 
 $sql .= (($area!="") ? " AND (((SELECT Latitude1 FROM Member WHERE No = Product.Member) = 0 AND Area = '$area') OR ((SELECT Latitude1 FROM Member WHERE No = Product.Member) > 0 AND (SELECT Area1 FROM Member WHERE No=Product.Member) = '$area'))" : "");
 
@@ -39,12 +124,12 @@ if($type != ""){
 
 
 $sql .= (($catalog!="") ? " AND Catalog = '$catalog'" : "");
+$sql .= (($catalog2!="") ? " AND Catalog2 = '$catalog2'" : "");
+$sql .= (($catalog3!="") ? " AND Catalog3 = '$catalog3'" : "");
 
 
 $sql .= " ORDER BY " .(($_SESSION['Latitude'] > 0 && $_SESSION['Longitude'] > 0) ? "KM, Level DESC, dateUpdate DESC" : "Level DESC, dateUpdate DESC");
-
-// echo $sql;
-
+//echo $sql;
 $result = mysql_query($sql) or die(mysql_error());
 $num = mysql_num_rows($result);
 $pagesize  = 10;
@@ -63,10 +148,10 @@ $WEB_CONTENT = <<<EOD
 		m = m % 60;
 		var d = Math.floor(h / 24);
 		h = h % 24;
-
+		
 		h = d * 24 + h;
 		return ((h > 0) ? h + "時" : "") + ((m > 0) ? m + "分" : "") + ((s > 0) ? s + "秒" : "");
-
+		
 		if(d > 30){
 			return ((d > 0)? d + "天" : "");
 		}
@@ -97,7 +182,7 @@ if ($num>0){
 			}
 			else{
 				$dis = "距離：? (請輸入<a href='member_location.php?url=" . urlencode("product1.php?area=$area&catalog=$catalog&type=$type&pageno=$pageno") . "&tab=1' style='text-decoration:underline'>我的位置</a>，再回頁面)</font>";
-				$dis = "距離：<a id='dis{$data['No']}' style='color:#FFFFFF; text-decoration:underline'; href='javascript:void(0);' onMouseOver='showDis();setDisPos({$data['No']}); '> ? </a>";
+				$dis = "距離：<a id='dis{$data['No']}' style='color:#FFFFFF'; href='javascript:void(0);' onMouseOver='showDis();setDisPos({$data['No']}); '> ? </a>";
 			}
 			$counts = 0;
 			$used = (($data['Used'] == 1) ? "<img src='./images/old_good.gif'>" : "");
@@ -184,7 +269,6 @@ EOD;
 				$discount = "<span style='font-size:20px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>- -</span><span style='font-size:20px; font-weight:bold; text-shadow: 0px 0px 6px rgba(255,255,255,0.7);'>折</span>";
 			}
 
-
 			$price_decoration = "line-through";
 			if($data['Price'] == $data['Price1']){
 				$price = "- -";
@@ -233,6 +317,7 @@ EOD;
 						</table>
 EOD;
 
+
 			if(strpos($data['CName'], "展演") > -1){
 				$activity = ";background:url('./images/show.gif'); background-repeat:no-repeat; background-position:605px 3px";
 			}
@@ -250,18 +335,18 @@ EOD;
 			}
 			$WEB_CONTENT .= <<<EOD
 				<tr>
-					<td style="text-align:left; background:white">
+					<td class="product-item">
 
 
-						<div class="product-item">
+						<div style="width:720px; height:279px; overflow:hidden;">
 							<div style="width:720px; height:279px; overflow:hidden">
 								<table width="720" height="279" cellpadding="0" cellspacing="0" border=0 style="{$activity}">
 									<tr>
 										<td style="width:348px; height:22px; color:white">
-											<table cellpadding="0" cellspacing="0" border=0 style="width:348px">
+											<table cellpadding="0" cellspacing="0" border=0 class="table-title">
 												<tr>
-													<td style="width:160px; padding-left:15px; height:22px; color:white; text-align:center; vertical-align:bottom; font-size:11pt"><div style="width:160px; height:22px; overflow:hidden; text-align:center; line-height:25px">{$data['TName']}</div></td>
-													<td style="width:184px; padding-left:10px; height:22px; color:white; text-align:center; vertical-align:bottom; font-size:11pt"><div style="width:160px; height:22px; overflow:hidden; text-align:center; line-height:25px">{$city}-{$dis}</div></td>
+													<td style="width:160px; padding-left:15px; height:22px; color:white; text-align:center; vertical-align:bottom; font-size:11pt"><div  class="top-title1">{$data['TName']}</div></td>
+													<td style="width:184px; padding-left:10px; height:22px; color:white; text-align:center; vertical-align:bottom; font-size:11pt"><div style="width:160px; height:22px; overflow:hidden; text-align:center; line-height:25px">&nbsp;</div></td>
 												</tr>
 											</table>
 										</td>
@@ -269,14 +354,14 @@ EOD;
 									</tr>
 									<tr>
 										<td style="padding-left:26px; padding-bottom:14px">
-										<div style="width:305px; height:198px; overflow:hidden; border:solid 0px gray"><a href="service_product1_detail.php?tab={$tab}&no={$data['No']}&area={$area}&type={$type}&catalog={$catalog}"><img src="./upload/{$data['Photo']}" style="width:305px; height:198px" border='0'></a></div>
+										<div style="width:305px; height:198px; overflow:hidden; border:solid 0px gray"><a href="member_product1_detail.php?no={$data['No']}&area={$area}&type={$type}&catalog={$catalog}"><img src="./upload/{$data['Photo']}" style="width:305px; height:198px" border='0'></a></div>
 										</td>
 										<td style="vertical-align:top; padding-left:5px" valign="top" >
-											<div  style="margin-top: 20px;"><a class="product-title" href="service_product1_detail.php?tab={$tab}&no={$data['No']}&area={$area}&type={$type}&catalog={$catalog}" style="color:#000000; font-size:22px; font-weight:bold">{$name}</a></div>
+											<div style="width:218px; height:28px; margin-top:15px; border:solid 0px gray; overflow:hidden"><a href="member_product1_detail.php?no={$data['No']}&area={$area}&type={$type}&catalog={$catalog}" style="color:#000000; font-size:22px; font-weight:bold">{$name}</a></div>
 											<div class="product-desc">{$data['Description']}</div>
 											<div style="width:310px; height:30px; margin-top:2px; border:solid 1px transparent; overflow:hidden; text-align:center; color:blue; font-size:13px; line-height:30px"></div>
-											<div class="product-shop"><a href="member_product.php?no={$data['Member']}" style="color:#FFFFFF; font-size:14px" target="_blank">商家 [{$seller}] 其它服務</a></div>
-											<div id="product-list-price-info">
+											<div class="product-shop">&nbsp;</div>
+											<div id="product-list-price-info" style="margin-top:25px;">
 												<div class="product-list-price">
 													<ul><li><h2>{$price_info}</h2></li></ul>
 													<span style="display:inline-block;margin-top:12px;margin-left:9px;">{$discount}</span>
@@ -285,7 +370,7 @@ EOD;
 											<div style="width:300px; height:22px; margin-top:5px; border:solid 1px transparent; overflow:hidden">
 												<table style="width:300px" cellpadding="0" cellspacing="0" border=0>
 													<tr>
-														<td style="width:27px; height:22px; text-align:right; padding-right:2px"><img src="./images/icon-buy.png"></td>
+														<td style="width:27px; height:22px; text-align:right; padding-right:2px"><img src="./images/icon-taxi.png"></td>
 														<td style="font-family: Arial,微軟正黑體;font-weight: bold;font-size: 14px;color: #a41101">{$activity_join}</td>
 														<td style="width:22px; height:22px; text-align:right; padding-right:2px"><img src="./images/icon-time.png"></td>
 														<td style="font-family: Arial,微軟正黑體;font-weight: bold;color: #434343;font-size: 14px;"><div id="timer{$data['No']}">{$activity_timer}</div></td>
@@ -309,12 +394,12 @@ EOD;
 							<table width="660" height="242" cellpadding="0" cellspacing="0" border=0 style="{$activity}">
 								<tr>
 									<td width="353" align='center' style="padding:22px; padding-bottom:22px; padding-left:22px;">
-										<div style="width:305px; height:198px; overflow:hidden; border:solid 1px gray"><a href="service_product1_detail.php?tab={$tab}&no={$data['No']}&area={$area}&type={$type}&catalog={$catalog}"><img src="./upload/{$data['Photo']}" style="width:305px; height:198px" border='0'></a></div>
+										<div style="width:305px; height:198px; overflow:hidden; border:solid 1px gray"><a href="product1_detail.php?no={$data['No']}&area={$area}&type={$type}&catalog={$catalog}"><img src="./upload/{$data['Photo']}" style="width:305px; height:198px" border='0'></a></div>
 									</td>
 									<td width="353" align='center' valign='top' aling='center' style="padding-top:22px; padding-bottom:22px; padding-right:22px">
 										<table width="303" cellpadding="0" cellspacing="0" border="0" align='center'>
 											<tr>
-												<td align='left'><div style='position:relative; left:-10px; text-align:left; color:#F74521; font-weight:bold; line-height:30px; height:30px; overflow:hidden'>【<a href="service_product1_detail.php?tab={$tab}&no={$data['No']}&area={$area}&type={$type}&catalog={$catalog}" style="color:#F74521">{$name}</a>】{$discount}</div></td>
+												<td align='left'><div style='position:relative; left:-10px; text-align:left; color:#F74521; font-weight:bold; line-height:30px; height:30px; overflow:hidden'>【<a href="product1_detail.php?no={$data['No']}&area={$area}&type={$type}&catalog={$catalog}" style="color:#F74521">{$name}</a>】{$discount}</div></td>
 											</tr>
 											<tr>
 												<td align='left'><div style="text-align:left; height:40px; overflow:hidden">{$data['Description']}</div></td>
@@ -357,16 +442,17 @@ EOD;
 					<td style=";height:13px; background:#FFFFFF"></td>
 				</tr>
 EOD;
+
+
 		}
 		else{
 			break;
 		}
 	}
-	$WEB_CONTENT .= "		</table>";
-	$WEB_CONTENT .= "	</td>";
-	$WEB_CONTENT .= "</tr>";
 }
+
 $WEB_CONTENT .= "</table>";
+
 //分页
 $WEB_CONTENT .= "<div class='page'><ul>";
 if($pageno > 1){
@@ -387,65 +473,11 @@ if($pageno < $pages){
 }
 $WEB_CONTENT .="</ul></div>";
 
-$url = urlencode("product1.php?area=$area&catalog=$catalog&type=$type&pageno=$pageno");
-$WEB_CONTENT .= <<<EOD
-<div id="dis" style="position:absolute;display:none; width:120px; padding:0px; text-align:center; background:#ffffcc; border-radius: 8px; border:solid 5px gray; z-index:99; padding-left:5px; padding-right:5px; padding-bottom:5px" onMouseOver="showDis();" onMouseOut="hideDis();">
-&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">距離： ? </span><br>
-<a href='member_location.php?url=$url&tab=1' style='text-decoration:underline'>請輸入我的位置<br>，再回頁面！</a></font>
-</div></div>
-EOD;
-
-
 include './include/db_close.php';
 
-//include 'search.php';
-$usefor = basename($_SERVER['PHP_SELF']);
-$usefor = strtoupper(substr($usefor, 0, 8));
-$catalog = $_REQUEST['catalog'];
-//include 'template0.php';
-$WEB_CONTENT .= <<<EOD
-
-<script language="javascript">
-	$("#catalog").val($catalog);
-	if($catalog2>0){
-		getCat2($catalog);
-		setTimeout(500);
-		$("#catalog2").val($catalog2);
-		if($catalog3>0){
-			getCat3($catalog2);
-			setTimeout(500);
-			$("#catalog3").val($catalog3);
-		}
-	}
-	
-	$.each($("#select input"),function(index,item){
-		if($(item).val() == '$tmp_type'){
-			$(item)[0].checked = "checked";
-		}
-	});
-
-</script>
-	<table cellpadding='0' cellspacing='0' border='0' idd="tbl1">
-EOD;
 ?>
-<?=$WEB_CONTENT?>
-<script language="javascript">
-function setPage(x){
-	parent.setPage(x);
-}
-function setDisPos(x){
-	var p = $("#dis"+x).position();
-	$("#dis").css({"top": p.top-3, "left": p.left-$("#dis").width()+25});
-
-}
-function showDis(){
-	$("#dis").show();
-}
-function hideDis(){
-	$("#dis").hide();
-}
-//parent.iAD.location.href="ad.php?usefor=<?=$usefor?>&catalog=<?=$catalog?>";
-</script>
-<script language="javascript">
-//parent.setTab(1);
-</script>
+<table cellpadding="0" cellspacing="0" border="0" width="720" style="padding-top:20px;">
+	<tr>
+		<td><?=$WEB_CONTENT?></td>
+	</tr>
+</table>

@@ -61,7 +61,6 @@ while($rs = mysql_fetch_array($result)){
 				<td></td>
 				<td style="text-align:center; font-size:12px">{$datereply}</td>
 			</tr>
-			<tr style="height:11px"></tr>
 EOD;
 	}
 	else{
@@ -74,7 +73,6 @@ EOD;
 				<td style="color:#E7711B; text-align:center">{$rat}&nbsp;&nbsp;<img src='./images/{$start}'></td>
 				<td style="text-align:center; font-size:12px">{$rs['dateRated']}</td>
 			</tr>
-			<tr style="height:11px"></tr>
 EOD;
 	}
 	$i++;
@@ -749,7 +747,6 @@ EOD;
 								<th width="18%">評分 ({$av} av)</th>
 								<th width="23%">留言時間</th>
 							</tr>
-							<tr style="height:11px"></tr>
 							{$rating}
 						</table>
 					</td>
