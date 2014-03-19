@@ -76,7 +76,6 @@ EOD;
 				<td style="color:#E7711B; text-align:center">{$rat}&nbsp;&nbsp;<img src='./images/{$start}'></td>
 				<td style="text-align:center; font-size:12px">{$rs['dateRated']}</td>
 			</tr>
-			<tr style="height:11px"></tr>
 EOD;
 	}
 	$i++;
