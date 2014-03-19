@@ -330,9 +330,9 @@ EOD;
 			$WEB_CONTENT .= <<<EOD
 				<tr>
 					<td class="product-item">
-						<div style="width:720px; height:279px; overflow:hidden;">
-							<div style="width:720px; height:279px; overflow:hidden">
-								<table width="720" height="279" cellpadding="0" cellspacing="0" border=0 style="{$activity}">
+						<div style="width:720px; height:262px; overflow:hidden;">
+							<div style="width:720px; height:262px; overflow:hidden">
+								<table width="720" height="262" cellpadding="0" cellspacing="0" border=0 style="{$activity}">
 									<tr>
 										<td style="width:348px; height:22px; color:white">
 											<table cellpadding="0" cellspacing="0" border=0 class="table-title">

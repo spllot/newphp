@@ -468,7 +468,7 @@ EOD;
 			$sold_info = <<<EOD
 												<table style="width:300px" cellpadding="0" cellspacing="0" border=0>
 													<tr>
-														<td style="width:27px; height:22px; text-align:right; padding-right:2px"><img src="./images/icon-taxi"></td>
+														<td style="width:27px; height:22px; text-align:right; padding-right:2px"><img src="./images/icon-taxi.png"></td>
 														<td style="font-family: Arial,微軟正黑體;font-weight: bold;font-size: 14px;color: #a41101">{$activity_join}</td>
 														<td style="width:22px; height:22px; text-align:right; padding-right:2px"><img src="./images/icon-time.png"></td>
 														<td style="font-family: Arial,微軟正黑體;font-weight: bold;color: #434343;font-size: 14px;"><div id="timer{$data['No']}">{$activity_timer}</div></td>
@@ -521,9 +521,9 @@ EOD;
 			$WEB_CONTENT .= <<<EOD
 				<tr>
 					<td class="product-item">
-						<div style="width:720px; height:279px; overflow:hidden;">
-							<div style="width:720px; height:279px; overflow:hidden">
-								<table width="720" height="279" cellpadding="0" cellspacing="0" border=0 style="{$activity}">
+						<div style="width:720px; height:262px; overflow:hidden;">
+							<div style="width:720px; height:262px; overflow:hidden">
+								<table width="720" height="262" cellpadding="0" cellspacing="0" border=0 style="{$activity}">
 									<tr>
 										<td style="width:348px; height:22px; color:white">
 											<table cellpadding="0" cellspacing="0" border=0 class="table-title">
