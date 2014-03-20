@@ -285,7 +285,7 @@ $map = <<<EOD
 								<td style="text-align:left; font-size:14pt; padding-top:8px; padding-bottom:8px">目前服務位置圖</td>
 							</tR>
 							<tr style="display:none">
-								<td><div id='map' style='width:612px; height:300px; text-align:center; vertical-align:middle'></div></td>
+								<td><div id='map' style='width:720px; margin-top: 10px; margin-bottom:20px;height:400px;  text-align:center; vertical-align:middle'></div></td>
 							</tR>
 <script type="text/javascript"> 
 		function createMarker(_point, name, phone, address, id) {
@@ -329,9 +329,9 @@ EOD;
 			}
 			$buy_info = "購買詳情請參考以下之說明介紹";
 			$photos = '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播一" src="./upload/' . $data['Photo'] . '" style="width:396px; height:248px"></li>';
-			$photos .= (($data['Slide'] == 1 && $data['Slide2'] != "") ? '<li class="service-in-pic"><img alt="吉達資訊圖片輪播二" src="' . $data['Slide2'] . '" style="width:396px; height:248px"></li>' : "");
-			$photos .= (($data['Slide'] == 1 && $data['Slide3'] != "") ? '<li class="service-in-pic"><img alt="吉達資訊圖片輪播三" src="' . $data['Slide3'] . '" style="width:396px; height:248px"></li>' : "");
-			$photos .= (($data['Slide'] == 1 && $data['Slide4'] != "") ? '<li class="service-in-pic"><img alt="吉達資訊圖片輪播四" src="' . $data['Slide4'] . '" style="width:396px; height:248px"></li>' : "");
+			// $photos .= (($data['Slide'] == 1 && $data['Slide2'] != "") ? '<li class="service-in-pic"><img alt="吉達資訊圖片輪播二" src="' . $data['Slide2'] . '" style="width:396px; height:248px"></li>' : "");
+			// $photos .= (($data['Slide'] == 1 && $data['Slide3'] != "") ? '<li class="service-in-pic"><img alt="吉達資訊圖片輪播三" src="' . $data['Slide3'] . '" style="width:396px; height:248px"></li>' : "");
+			// $photos .= (($data['Slide'] == 1 && $data['Slide4'] != "") ? '<li class="service-in-pic"><img alt="吉達資訊圖片輪播四" src="' . $data['Slide4'] . '" style="width:396px; height:248px"></li>' : "");
 			$discount = (float)(number_format(($data['Price1'] / $data['Price'])*10,1));
 			if($discount <= 0){
 				$discount = "免費";

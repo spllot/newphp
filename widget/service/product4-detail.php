@@ -1,6 +1,7 @@
 <?php
 include './include/session.php';
 require_once getcwd() . '/class/facebook.php';
+ob_start();
 $tab = 4;
 include './include/db_open.php';
 $no = $_REQUEST['no'];
@@ -364,7 +365,7 @@ $map = <<<EOD
 								</td>
 							</tR>
 							<tr>
-								<td><div id='map' style='width:612px; height:300px; text-align:center; vertical-align:middle'></div></td>
+								<td><div id='map' style='width:720px; margin-top: 10px; margin-bottom:20px;height:400px; text-align:center; vertical-align:middle'></div></td>
 							</tR>
 <script type="text/javascript"> 
 		function createMarker(_point, name, phone, address, id) {
@@ -410,9 +411,9 @@ EOD;
 			}
 			$buy_info = "服務詳情請參考以下之說明介紹";
 			$photos = '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播一" src="./upload/' . $data['Photo'] . '" style="width: 393px;height: 245px"></li>';
-			$photos .= (($data['Slide'] == 1 && $data['Slide2'] != "") ? '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播二" src="' . $data['Slide2'] . '" style="width: 393px;height: 245px"></li>' : "");
-			$photos .= (($data['Slide'] == 1 && $data['Slide3'] != "") ? '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播三" src="' . $data['Slide3'] . '" style="width: 393px;height: 245px"></li>' : "");
-			$photos .= (($data['Slide'] == 1 && $data['Slide4'] != "") ? '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播四" src="' . $data['Slide4'] . '" style="width: 393px;height: 245px"></li>' : "");
+			// $photos .= (($data['Slide'] == 1 && $data['Slide2'] != "") ? '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播二" src="' . $data['Slide2'] . '" style="width: 393px;height: 245px"></li>' : "");
+			// $photos .= (($data['Slide'] == 1 && $data['Slide3'] != "") ? '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播三" src="' . $data['Slide3'] . '" style="width: 393px;height: 245px"></li>' : "");
+			// $photos .= (($data['Slide'] == 1 && $data['Slide4'] != "") ? '<li class="service-in-pic" style="margin-top:-13px;"><img alt="吉達資訊圖片輪播四" src="' . $data['Slide4'] . '" style="width: 393px;height: 245px"></li>' : "");
 			if($data['Transport'] == 1){
 				$discount = (($data['taxi_discount']) ? "{$data['taxi_discount']}折":"");
 			}

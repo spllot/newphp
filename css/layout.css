@@ -924,9 +924,9 @@
 
 .service-in-pic{
 	background:url(../images/service-in-pic-bg.jpg) no-repeat 0 0;
-	width:393px; height:245px;
+	width:393px; 
+	height:245px;
 	padding:7px 10px 10px 7px;
-	float:left;
 }
 
 #service-in-right{
@@ -1593,4 +1593,7 @@ ul#global_navi li.expandable span a{
 	margin-top: 1px;
 	float: right;
 	background: url(../images/service-in-join-btn-1.png) no-repeat 96% -1px;
+}
+.lbtn li a{
+	display: none;
 }

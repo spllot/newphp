@@ -321,7 +321,7 @@ $map = <<<EOD
 								</td>
 							</tR>
 							<tr>
-								<td><div id='map' style='width:612px; height:300px; text-align:center; vertical-align:middle'></div></td>
+								<td><div id='map' style='width:720px; margin-top: 10px; margin-bottom:20px;height:400px;  text-align:center; vertical-align:middle'></div></td>
 							</tR>
 <script type="text/javascript"> 
 		function createMarker(_point, name, phone, address, id) {

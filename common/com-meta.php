@@ -13,3 +13,4 @@
 <script src="js/oslide.js" language="javascript" type="text/javascript"></script>
 <script src="js/easing.js" language="javascript" type="text/javascript"></script>
 <script language="javascript" src="js/scrollbar.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi?key=ABQIAAAAwnI081IB-1YQtn3DiExB7hQAaOLpgxbI1qAjGGRql3xj-qYYohQaZIKM_4qi4nCHaMvKs5cHNkkAWA"></script>
