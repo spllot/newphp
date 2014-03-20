@@ -33,6 +33,8 @@ $tab = <<<EOD
 	border-bottom:solid 2px #a9a9a9;
 	width:10px;
 	line-height:41px;
+	display:inline-block;
+	height:41px;
 }
 </style>
 <table style="width:100%" cellpadding="0" cellspacing="0">

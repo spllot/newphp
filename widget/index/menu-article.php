@@ -1,22 +1,29 @@
 <div id="menu-article"><!--/精選推薦文章-->
-  <dl id="dl-1">
-<dt><h1>精選推薦文章</h1></dt>
-<dd><ul>
-<li><a href="#"><img src="images/home-article-1.jpg" width="80" height="65"></a>
-<a href="#"><h3>港點大師手作烏魚子</h3></a>
-東港生產的烏魚子是台灣的名產之一，每年10-12月烏.</li>
-<li><a href="#"><img src="images/home-article-2.jpg" width="80" height="65"></a>
-<a href="#"><h3>港點大師手作烏魚子</h3></a>
-東港生產的烏魚子是台灣的名產之一，每年10-12月烏.</li>
-<li><a href="#"><img src="images/home-article-3.jpg" width="80" height="65"></a>
-<a href="#"><h3>港點大師手作烏魚子</h3></a>
-東港生產的烏魚子是台灣的名產之一，每年10-12月烏.</li>
-<li><a href="#"><img src="images/home-article-4.jpg" width="80" height="65"></a>
-<a href="#"><h3>港點大師手作烏魚子</h3></a>
-東港生產的烏魚子是台灣的名產之一，每年10-12月烏.</li>
-<li><a href="#"><img src="images/home-article-5.jpg" width="80" height="65"></a>
-<a href="#"><h3>港點大師手作烏魚子</h3></a>
-東港生產的烏魚子是台灣的名產之一，每年10-12月烏.</li>
-</ul>
-</dd></dl>
-<!--/menu-article-精選推薦文章--></div>
+  	<dl id="dl-1">
+		<dt><h1>精選推薦文章</h1></dt>
+		<dd>
+			<ul>
+				<?php
+				  include './include/db_open.php';
+				  $sql = 'SELECT * FROM blog';
+				  $result = mysql_query($sql);
+				  $i=1;
+				  while($i<6 && $rs = mysql_fetch_array($result)){
+				  	if(mb_strlen($rs['Subject'], 'utf8') > 9){
+				      $caption = mb_substr($rs['Subject'], 0, 8, 'utf8') . "…" ;
+				    }
+				    else{
+				      $caption = mb_substr($rs['Subject'], 0, 9, 'utf8');
+				    }
+				  	echo '<li><a target="_blank" href="'.$rs['Url'].'"><img src="images/home-article-'.$i.'.jpg" width="80" height="65"></a><a target="_blank"  href="'.$rs['Url'].'"><h3>'.$rs['Subject'].'</h3></a></li>';
+				    $i++;
+				  }
+
+				  $result = mysql_query($sql);
+				  include './include/db_close.php';
+				?>
+			</ul>
+		</dd>
+	</dl>
+<!--/menu-article-精選推薦文章-->
+</div>

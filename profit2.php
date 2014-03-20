@@ -2,7 +2,7 @@
 include './include/session.php';
 include './include/db_open.php';
 include 'profit_tab.php';
-
+ob_start();
 $pageno = $_REQUEST['pageno'];
 
 

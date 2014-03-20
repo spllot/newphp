@@ -2,7 +2,7 @@
 include './include/session.php';
 
 include './include/db_open.php';
-
+ob_start();
 
 $sql = "SELECT * FROM Page WHERE useFor = 'PGE_CONTACT'";
 $result = mysql_query($sql) or die(mysql_error());

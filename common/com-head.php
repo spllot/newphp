@@ -14,11 +14,11 @@
 </nav>
 
 <div id="head-search">
-<form action="" method="get">
-<input name="" type="text">
-<select>
-  <option value="商家帳號">商家帳號</option>
-   <option value="服務代碼">服務代碼</option>
+<form action="member_search2.php">
+<input name="keyword" type="text">
+<select name="type">
+  <option value="email">商家帳號</option>
+   <option value="code">服務代碼</option>
 </select>
 <input name="" type="submit" value="送出" class="btn-search">
 </form>

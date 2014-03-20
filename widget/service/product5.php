@@ -1,7 +1,7 @@
 <?php
 include './include/session.php';
 include './include/db_open.php';
-
+ob_start();
 $tab =$_REQUEST['tab'];
 $area=$_REQUEST['area'];
 $type=$_REQUEST['type'];
@@ -619,25 +619,26 @@ EOD;
 $WEB_CONTENT .= "</table></div>";
 
 //分页
-$WEB_CONTENT .= "<div class='page'><ul>";
-if($pageno > 1){
-	$WEB_CONTENT .= "<li class='page-prev'><a href='javascript:" . (($pageno > 1) ? "setPage(" . ($pageno - 1) . ")" : "void(0)"). ';">&lt;上一頁</a></li>';
-}
-$WEB_CONTENT .= "<li class='page-number'>";
-for($i=0; $i<$pages; $i++){
-	if(($i+1)==$pageno){
-		$WEB_CONTENT .= intval($i+1) ;
+if($pages > 1){
+	$WEB_CONTENT .= "<div class='page'><ul>";
+	if($pageno > 1){
+		$WEB_CONTENT .= "<li class='page-prev'><a href='javascript:" . (($pageno > 1) ? "setPage(" . ($pageno - 1) . ")" : "void(0)"). ";'>&lt;上一頁</a></li>";
 	}
-	else{
-		$WEB_CONTENT .= "<a style='margin-left: 10px;' href='javascript:" . "setPage(" . ($i+1) . ")". ';\'>'. ($i+1)."</a>";
+	$WEB_CONTENT .= "<li class='page-number'>";
+	for($i=0; $i<$pages; $i++){
+		if(($i+1)==$pageno){
+			$WEB_CONTENT .= intval($i+1) ;
+		}
+		else{
+			$WEB_CONTENT .= "<a style='margin-left: 10px;margin-right:10px;' href='javascript:" . "setPage(" . ($i+1) . ")". ';\'>'. ($i+1)."</a>";
+		}
 	}
+	$WEB_CONTENT .= "</li>";
+	if($pageno < $pages){
+		$WEB_CONTENT .= "<li class='page-next'><a href='javascript:" . (($pageno < $pages) ? "setPage(" . ($pageno + 1) . ")" : "void(0)"). ";'>下一頁&gt;</a></li>";
+	}
+	$WEB_CONTENT .="</ul></div>";
 }
-$WEB_CONTENT .= "</li>";
-if($pageno < $pages){
-	$WEB_CONTENT .= "<li class='page-next'><a href='javascript:" . (($pageno < $pages) ? "setPage(" . ($pageno + 1) . ")" : "void(0)"). ";'>下一頁&gt;</a></li>";
-}
-$WEB_CONTENT .="</ul></div>";
-
 include './include/db_close.php';
 
 //include 'search.php';
@@ -675,7 +676,16 @@ EOD;
 <?=$WEB_CONTENT?>
 <script language="javascript">
 function setPage(x){
-	parent.setPage(x);
+	var url = location.href;
+	if(url.indexOf("pageno=")>0){
+		location.href = url.replace(/pageno=\d+/,"pageno="+x);
+	}else{
+		if(url.indexOf("?")>0){
+			location.href = url + "&pageno="+x;
+		}else{
+			location.href = url + "pageno="+x;
+		}
+	}
 }
 //parent.iAD.location.href="ad.php?usefor=<?=$usefor?>&catalog=<?=$catalog?>";
 </script>

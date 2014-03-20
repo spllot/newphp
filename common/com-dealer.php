@@ -9,11 +9,8 @@
 					$html   = "";
 					$i      = 1;
 					$num = mysql_num_rows($result);
-					while($rs = mysql_fetch_array($result)){
-						if($i > 15){
-							break;
-						}
-						$html = $html.'<li><a href="'.$rs['Link'].'">'.$rs['Caption'].'</a></li>';
+					while($i < 10 && $rs = mysql_fetch_array($result)){
+						$html = $html.'<li><a target="_blank" href="'.$rs['Url'].'">'.$rs['Caption'].'</a></li>';
 						$i++;
 					}
 					include './include/db_close.php';

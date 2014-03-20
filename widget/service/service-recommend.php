@@ -3,6 +3,7 @@
 //$usefor = basename($_SERVER['PHP_SELF']);
 //$usefor = strtoupper(substr($usefor, 0, 8));
 include './include/db_open.php';
+ob_start();
 $result = mysql_query("SELECT * FROM Config");
 while($rs = mysql_fetch_array($result)){
 	$_CONFIG[$rs['ID']] = $rs['YN'];

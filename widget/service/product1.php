@@ -1,7 +1,7 @@
 <?php
 include './include/session.php';
 include './include/db_open.php';
-
+ob_start();
 $tab= $_REQUEST['tab'];
 $area=$_REQUEST['area'];
 $type=$_REQUEST['type'];
@@ -368,25 +368,26 @@ EOD;
 }
 $WEB_CONTENT .= "</table>";
 //分页
-$WEB_CONTENT .= "<div class='page'><ul>";
-if($pageno > 1){
-	$WEB_CONTENT .= "<li class='page-prev'><a href='javascript:" . (($pageno > 1) ? "setPage(" . ($pageno - 1) . ")" : "void(0)"). ';">&lt;上一頁</a></li>';
-}
-$WEB_CONTENT .= "<li class='page-number'>";
-for($i=0; $i<$pages; $i++){
-	if(($i+1)==$pageno){
-		$WEB_CONTENT .= intval($i+1) ;
+if($pages > 1){
+	$WEB_CONTENT .= "<div class='page'><ul>";
+	if($pageno > 1){
+		$WEB_CONTENT .= "<li class='page-prev'><a href='javascript:" . (($pageno > 1) ? "setPage(" . ($pageno - 1) . ")" : "void(0)"). ";'>&lt;上一頁</a></li>";
 	}
-	else{
-		$WEB_CONTENT .= "<a style='margin-left: 10px;' href='javascript:" . "setPage(" . ($i+1) . ")". ';\'>'. ($i+1)."</a>";
+	$WEB_CONTENT .= "<li class='page-number'>";
+	for($i=0; $i<$pages; $i++){
+		if(($i+1)==$pageno){
+			$WEB_CONTENT .= intval($i+1) ;
+		}
+		else{
+			$WEB_CONTENT .= "<a style='margin-left: 10px;margin-right:10px;' href='javascript:" . "setPage(" . ($i+1) . ")". ';\'>'. ($i+1)."</a>";
+		}
 	}
+	$WEB_CONTENT .= "</li>";
+	if($pageno < $pages){
+		$WEB_CONTENT .= "<li class='page-next'><a href='javascript:" . (($pageno < $pages) ? "setPage(" . ($pageno + 1) . ")" : "void(0)"). ";'>下一頁&gt;</a></li>";
+	}
+	$WEB_CONTENT .="</ul></div>";
 }
-$WEB_CONTENT .= "</li>";
-if($pageno < $pages){
-	$WEB_CONTENT .= "<li class='page-next'><a href='javascript:" . (($pageno < $pages) ? "setPage(" . ($pageno + 1) . ")" : "void(0)"). ";'>下一頁&gt;</a></li>";
-}
-$WEB_CONTENT .="</ul></div>";
-
 $url = urlencode("product1.php?area=$area&catalog=$catalog&type=$type&pageno=$pageno");
 $WEB_CONTENT .= <<<EOD
 <div id="dis" style="position:absolute;display:none; width:120px; padding:0px; text-align:center; background:#ffffcc; border-radius: 8px; border:solid 5px gray; z-index:99; padding-left:5px; padding-right:5px; padding-bottom:5px" onMouseOver="showDis();" onMouseOut="hideDis();">
@@ -431,7 +432,16 @@ EOD;
 <?=$WEB_CONTENT?>
 <script language="javascript">
 function setPage(x){
-	parent.setPage(x);
+	var url = location.href;
+	if(url.indexOf("pageno=")>0){
+		location.href = url.replace(/pageno=\d+/,"pageno="+x);
+	}else{
+		if(url.indexOf("?")>0){
+			location.href = url + "&pageno="+x;
+		}else{
+			location.href = url + "pageno="+x;
+		}
+	}
 }
 function setDisPos(x){
 	var p = $("#dis"+x).position();

@@ -3,6 +3,8 @@ include './include/session.php';
 require_once getcwd() . '/class/facebook.php';
 $tab = 5;
 include './include/db_open.php';
+
+ob_start();
 $no = $_REQUEST['no'];
 $result = mysql_query("SELECT * FROM Config");
 while($rs = mysql_fetch_array($result)){
@@ -1251,7 +1253,7 @@ function resumeDiv() {
 	function Switch(x){
 		counts[x] ++;
 		$('#p'+x).toggle();
-		$('#b'+x).css({background: "url('./images/service-in-join-btn-" + ((counts[x] % 2 == 1) ? "2" : "1") + ".png')"});
+		$('#b'+x+" .arrow").css({background: "url('./images/service-in-join-btn-" + ((counts[x] % 2 == 1) ? "2" : "1") + ".png')"});
 		if(x=="1" && counts[x] % 2 == 1){
 
 		}

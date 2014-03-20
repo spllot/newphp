@@ -2,7 +2,7 @@
 include './include/session.php';
 
 include './include/db_open.php';
-
+ob_start();
 
 
 
