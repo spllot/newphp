@@ -648,4 +648,15 @@ include './include/db_close.php';
 		}
 		
 	}
+	function setDisPos(x){
+		var p = $("#dis"+x).offset();
+		$("#dis").css({"top": p.top-320, "left": p.left-$("#dis").width()-50});
+
+	}
+	function showDis(){
+		$("#dis").show();
+	}
+	function hideDis(){
+		$("#dis").hide();
+	}
 </script>

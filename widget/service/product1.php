@@ -444,8 +444,8 @@ function setPage(x){
 	}
 }
 function setDisPos(x){
-	var p = $("#dis"+x).position();
-	$("#dis").css({"top": p.top-3, "left": p.left-$("#dis").width()+25});
+	var p = $("#dis"+x).offset();
+	$("#dis").css({"top": p.top-320, "left": p.left-$("#dis").width()-50});
 
 }
 function showDis(){

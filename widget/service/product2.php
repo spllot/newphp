@@ -429,6 +429,17 @@ function setPage(x){
 		}
 	}
 }
+function setDisPos(x){
+	var p = $("#dis"+x).offset();
+	$("#dis").css({"top": p.top-320, "left": p.left-$("#dis").width()-50});
+
+}
+function showDis(){
+	$("#dis").show();
+}
+function hideDis(){
+	$("#dis").hide();
+}
 //parent.iAD.location.href="ad.php?usefor=<?=$usefor?>&catalog=<?=$catalog?>";
 </script>
 <script language="javascript">

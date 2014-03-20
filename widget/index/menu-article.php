@@ -19,7 +19,6 @@
 				    $i++;
 				  }
 
-				  $result = mysql_query($sql);
 				  include './include/db_close.php';
 				?>
 			</ul>
