@@ -1,3 +1,4 @@
+<?php error_reporting(0); ?>
 <?php
 include './include/session.php';
 $seller = $_REQUEST['no'];
