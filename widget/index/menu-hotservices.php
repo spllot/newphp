@@ -5,7 +5,7 @@
 			<ul>
 				<?php
 				  include './include/db_open.php';
-				  $sql = 'SELECT * FROM product order by Used desc';
+				  $sql = 'SELECT * FROM Product order by Used desc';
 				  $result = mysql_query($sql);
 				  $i=1;
 				  if($result){

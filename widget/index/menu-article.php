@@ -5,7 +5,7 @@
 			<ul>
 				<?php
 				  include './include/db_open.php';
-				  $sql = 'SELECT * FROM blog';
+				  $sql = 'SELECT * FROM Blog';
 				  $result = mysql_query($sql);
 				  $i=1;
 				  if($result){
