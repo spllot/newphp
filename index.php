@@ -1,3 +1,4 @@
+<?php error_reporting(0); ?>
 <!doctype html>
 <html>
   <head>
@@ -12,6 +13,17 @@
     <script src="SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
   </head>
 <body>
+  <?php
+    include './include/session.php';
+    include './include/db_open.php';
+    if(!$_SESSION['WELCOME']){
+      $result = mysql_query("SELECT * FROM Config WHERE YN = 'Y' AND ID='welcome'");
+      if(mysql_num_rows($result) > 0){
+        $welcome = true;
+      }
+    }
+    include './include/db_close.php';
+  ?>
   <?php include_once("./common/com-head.php");?><!--/表頭-->
   <nav id="menu">
     <ul>
@@ -53,5 +65,16 @@
   <script type="text/javascript">
   var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
   </script>
+ <script type="text/javascript">  
+  <?php
+if($welcome){
+  echo <<<EOD
+    $(document).ready(function() {  
+        $.fn.colorbox({href:"welcome.php", opacity: 0.5, open:true, width:670, height:460});  
+    });  
+EOD;
+}
+?>
+</script>
 </body>
 </html>

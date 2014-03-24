@@ -1,12 +1,12 @@
 <?php
 class Tools{
-	function isImage($xExt){
+	public static function isImage($xExt){
 		$IMAGE_FILE = array("JPEG", "JPG", "PNG", "GIF");
 		$xExt = strtoupper($xExt);
 		return in_array($xExt, $IMAGE_FILE);
 	}
 
-	function unzip($file, $path) {
+	public static function unzip($file, $path) {
 		$zip = zip_open($file);
 		if ($zip) {
 			while ($zip_entry = zip_read($zip)) {
@@ -34,24 +34,24 @@ class Tools{
 		}
 	} 
 
-	function cutString($new_str, $new_len){
+	public static function cutString($new_str, $new_len){
 		$new_str = strip_tags($new_str);
 		return mb_strimwidth($new_str, 0, $new_len, '...', 'UTF-8');
 	}
-	function getShareLink($page_url, $page_title){
+	public static function getShareLink($page_url, $page_title){
 		return <<<EOD
 										<a href="javascript: void(window.open('http://www.facebook.com/share.php?u='.concat(encodeURIComponent(location.href)) ));"><img src="./images/icon_facebook.gif" border="0"><a>
 										<a href="javascript: void(window.open('http://twitter.com/home/?status='.concat(encodeURIComponent(document.title)) .concat(' ') .concat(encodeURIComponent(location.href))));"><img src="./images/icon_twitter.gif" border="0"><a>
 										<a href="javascript: void(window.open('http://www.plurk.com/?qualifier=shares&status=' .concat(encodeURIComponent(location.href)) .concat(' ') .concat('&#40;') .concat(encodeURIComponent(document.title)) .concat('&#41;')));"><img src="./images/icon_plurk.jpg" border="0"><a>
 EOD;
 	}
-	function parsePath($new_path){
+	public static function parsePath($new_path){
 		$paths = explode(">", $new_path);
 		return trim($paths[sizeof($paths) - 1]);
 
 	}
 
-	function Surround($new_string){
+	public static function Surround($new_string){
 		$str = "";
 		$str .= "<table cellpadding=\"0\" cellspacing=\"\" border=\"0\">";
 		$str .= "<tr>";
@@ -63,7 +63,7 @@ EOD;
 		return $str;
 	}
 
-	function formatBytes($bytes, $precision = 2) { 
+	public static function formatBytes($bytes, $precision = 2) { 
 		$units = array('B', 'KB', 'MB', 'GB', 'TB'); 
 	   
 		$bytes = max($bytes, 0); 
@@ -76,7 +76,7 @@ EOD;
 	} 
 
 
-	function lastIndexOf($string,$item){
+	public static function lastIndexOf($string,$item){
 		$index=strpos(strrev($string),strrev($item));
 		if ($index){
 			$index=strlen($string)-strlen($item)-$index;
@@ -86,11 +86,11 @@ EOD;
 			return -1;
 		}
 	}
-	function getRemoteIP(){
+	public static function getRemoteIP(){
 		return ((getenv(HTTP_X_FORWARDED_FOR)) ?  getenv(HTTP_X_FORWARDED_FOR) :  getenv(REMOTE_ADDR));
 	}
 
-	function getExts ($filename){ 
+	public static function getExts ($filename){ 
 		$filename = strtolower($filename) ; 
 		$exts = explode("[/\\.]", $filename) ; 
 		$n = count($exts)-1; 
@@ -98,11 +98,11 @@ EOD;
 		return $exts; 
 	} 
 
-    function parseInt($new_int){
+    public static function parseInt($new_int){
         return Tools::parseInt2($new_int, 0);
     }//parseInt
 
-    function parseInt2($new_int, $new_value){
+    public static function parseInt2($new_int, $new_value){
         settype($new_int, "int");
         if ($new_int > 0){
             return $new_int;
@@ -113,11 +113,11 @@ EOD;
         }//else
     }//parseInt2
 
-    function parseString($new_string){
+    public static function parseString($new_string){
         return Tools::parseString2($new_string, "");
     }//parseString
 
-    function parseString2($new_string, $new_value){
+    public static function parseString2($new_string, $new_value){
         settype($new_string, "string");
         settype($new_value, "string");
         if (strlen($new_string) > 0){
@@ -129,23 +129,23 @@ EOD;
     }//parseString
 
 
-	function checkCellPhone($new_phone){
+	public static function checkCellPhone($new_phone){
         return preg_match("/09[0-9]{8}$/", $new_phone);
 	}//checkCellPhone
 
-    function checkEMail($new_email){
+    public static function checkEMail($new_email){
         return preg_match("/^[^\s()<>@,;:\"\/\[\]?=]+@\w[\w-]*(\.\w[\w-]*)*\.[a-z]{2,}$/i", $new_email);
 	}//checkEMail
 
-    function checkAccount($new_account){
+    public static function checkAccount($new_account){
         return preg_match("/^[a-zA-Z][a-zA-Z0-9]{2,11}$/", $new_account);
     }//checkAccount
 
-    function checkPassword($new_password){
+    public static function checkPassword($new_password){
         return preg_match("/[a-zA-Z0-9]{6,12}$/", $new_password);
     }//checkPassword
 
-    function newPassword($new_length){
+    public static function newPassword($new_length){
         $pattern = "abchefghjkmnpqrstuvwxyz0123456789";
         srand((double)microtime()*1000000);
       	$i = 0;
@@ -158,7 +158,7 @@ EOD;
       	return $pass;
     }//newPassword
 
-    function newCode($new_length){
+    public static function newCode($new_length){
         $pattern = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         srand((double)microtime()*1000000);
       	$i = 0;
@@ -171,7 +171,7 @@ EOD;
       	return $pass;
     }//newCode
 
-    function readFromFile($fileName){
+    public static function readFromFile($fileName){
         $file = "G\"$fileName\"!!";
         if (file_exists($fileName) > 0){
             $file = file_get_contents($fileName);
@@ -179,14 +179,14 @@ EOD;
         return $file;
     }//readFromFile
 
-    function getHeader($newCode){
+    public static function getHeader($newCode){
 	   $cur_year  = date('Y') - 1911;
 	   $cur_month = date('m');
 	   $cur_day  = date('d');
        return $newCode . $cur_year . $cur_month . $cur_day;
 
     }
-	function getNextNo($code, $currNo){
+	public static function getNextNo($code, $currNo){
 	   if ($currNo){
 			$currNo = substr($currNo, 8);
 			$nextNo = substr("0000" . ($currNo + 1), -4);
@@ -198,7 +198,7 @@ EOD;
 	}//
 
 
-	function getImageType($new_subname){
+	public static function getImageType($new_subname){
 		switch (strtoupper($new_subname)) {
 		  case "JPEG":
 			return "JPEG";
@@ -213,7 +213,7 @@ EOD;
 		}
 	}
 
-	function loadImage($imgname, $imgtype){
+	public static function loadImage($imgname, $imgtype){
 		if(file_exists($imgname)){
 			if ( $imgtype == "JPEG" )
 			  $im = @ImageCreateFromJPEG($imgname);
@@ -232,7 +232,7 @@ EOD;
 	   return $im;
 	}
 	/*傳回 0 表示這個身分證字號是正確的*/
-	function check_roc_id($roc_id){
+	public static function check_roc_id($roc_id){
 		if(strlen($roc_id) != 10){
 			return -1;
 		}
@@ -259,7 +259,7 @@ EOD;
 			$n[11]) % 10); 
 	}
 
-	function checkNick($id){   
+	public static function checkNick($id){   
 		$head = array('A'=>1,'I'=>39,'O'=>48,'B'=>10,'C'=>19,'D'=>28,   
 					  'E'=>37,'F'=>46,'G'=>55,'H'=>64,'J'=>73,'K'=>82,   
 					  'L'=>2,'M'=>11,'N'=>20,'P'=>29,'Q'=>38,'R'=>47,   

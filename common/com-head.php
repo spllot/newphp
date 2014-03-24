@@ -1,8 +1,24 @@
+<?php
+    include './include/db_open.php';
+  	$result = mysql_query("SELECT * FROM Config WHERE  ID='logo'");
+	while($rs = mysql_fetch_array($result)){
+		$logo = $rs['YN'];
+	}
+    include './include/db_close.php';
+?>
+<?php
+	$info  = "登入";
+	$hlink = "member_login.php";
+	if($_SESSION['member'] && $_SESSION['member']['No'] && $_SESSION['member']['No']!=""){
+		$info = "登出";
+		$hlink = "member_logout2.php";
+	}
+?>
 <a id="top" ></a>
 <header id="head">
-<h1><a href="index.php"><img src="images/head-logo.jpg" width="365" height="115"></a></h1>
+<h1><a href="index.php"><img src="./upload/<?=$logo?>" width="365" height="115"></a></h1>
 <nav><ul>
-<li><a href="member_login.php">登入</a></li>
+<li><a href="<?=$hlink?>"><?=$info?></a></li>
 <li><a href="member_register.php">註冊會員</a>
 </li>
 <li><a href="member_lead.php">新手上路</a></li>
