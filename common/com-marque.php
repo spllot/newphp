@@ -9,9 +9,19 @@
 	}
 ?>
 <div id="marquee">
-	<a href="#">3大手機品牌最高送3500      時尚服裝單品 快搶！      年終特賣!一件不留3折起</a><!--/marquee--></div>
+	<?php
+		include './include/db_open.php';
+		$result=mysql_query("SELECT No, Subject, Content, useFor FROM Page WHERE useFor='MARQUEE'");
+	    if(($num=mysql_num_rows($result))==1){
+	        list($no, $subject, $content, $usefor) = mysql_fetch_row($result);
+	        echo $content;
+	    }
+	    include './include/db_close.php';
+	?>
+</div>
+<div>
 	<ul id="home-login">
-	  <li class="<?=$lclazz?>"><a href="<?=$llink?>"><img src="<?=$lpic?>" width="114" height="35"></a></li>
+	  <li style="margin-top:-35px;" class="<?=$lclazz?>"><a href="<?=$llink?>"><img src="<?=$lpic?>" width="114" height="35"></a></li>
 	  <li class="btn-member-1"><a href="member.php"><img src="images/btn-member-2.gif" width="121" height="35"></a></li>
 	</ul>
 </div>

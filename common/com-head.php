@@ -4,9 +4,32 @@
 	while($rs = mysql_fetch_array($result)){
 		$logo = $rs['YN'];
 	}
+
+	$userinfo = "";
+	if($_SESSION['member'] && $_SESSION['member']['No'] && $_SESSION['member']['No']!=""){
+		$result = mysql_query("SELECT * FROM Member WHERE userID = '" . $_SESSION['member']['userID'] . "'");
+		$member = mysql_fetch_array($result);
+		$balance=0;
+		$trust = 0;
+		$result = mysql_query("SELECT COALESCE(SUM(Amount), 0) as Amount FROM logTransaction WHERE Owner='" . $_SESSION['member']['userID'] . "'");
+		if($rs=mysql_fetch_array($result)){
+			$balance = $rs['Amount'];
+		}
+		$result = mysql_query("SELECT COALESCE(SUM(Quality), 0) as Amount FROM logRating WHERE Owner='" . $_SESSION['member']['No'] . "'");
+		if($rs=mysql_fetch_array($result)){
+			$trust = $rs['Amount'];
+		}
+
+		$trust = (($_SESSION['member']['Seller']==2) ? "，賣家評價：" . number_format($trust) . "" : "");
+
+		$userinfo = '<div class="user-info">
+						<span>Hi, '.$_SESSION["member"]["Nick"].'(等級：'.$_SESSION["member"]["Level"].$trust.')，&nbsp;</span>
+						<span>儲值金：$'.number_format($balance).'&nbsp;</span>
+					</div>';
+	}
+
     include './include/db_close.php';
-?>
-<?php
+
 	$info  = "登入";
 	$hlink = "member_login.php";
 	if($_SESSION['member'] && $_SESSION['member']['No'] && $_SESSION['member']['No']!=""){
@@ -38,5 +61,6 @@
 </select>
 <input name="" type="submit" value="送出" class="btn-search">
 </form>
-<!--/head-search--></div >
+</div>
+<?=$userinfo?>
 </header>

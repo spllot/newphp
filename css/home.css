@@ -620,6 +620,17 @@ border-top:1px solid #d2d2d2;
 	border: 1px solid #dcdcdc;
 	box-shadow: 0 0 10px rgba(204,204,204,0.5) inset;
 }
+.user-info{
+	position: absolute;
+	top: 80px;
+	right: 16px;
+	padding: 8px 15px;
+}
+.user-info span{
+	font-family:Arial Unicode MS, 微軟正黑體;
+	color:red;
+	font-size:14px;
+}
 
 
 
