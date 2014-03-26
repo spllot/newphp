@@ -1,5 +1,4 @@
 <?php
-include './include/session.php';
 include './include/db_open.php';
 
 $tab= $_REQUEST['tab'];

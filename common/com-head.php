@@ -1,4 +1,5 @@
 <?php
+    include './include/session.php';
     include './include/db_open.php';
   	$result = mysql_query("SELECT * FROM Config WHERE  ID='logo'");
 	while($rs = mysql_fetch_array($result)){

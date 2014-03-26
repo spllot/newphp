@@ -1,5 +1,4 @@
 <?php
-include './include/session.php';
 require_once getcwd() . '/class/facebook.php';
 ob_start();
 $tab = 4;

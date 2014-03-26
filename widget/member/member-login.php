@@ -1,5 +1,4 @@
 <?php
-include './include/session.php';
 require_once './class/javascript.php';
 
 $tab = 3;

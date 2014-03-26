@@ -1,5 +1,4 @@
 <?php
-include './include/session.php';
 $seller = $_REQUEST['no'];
 
 include './include/db_open.php';

@@ -1,5 +1,4 @@
 <?php
-include './include/session.php';
 include './include/db_open.php';
 $result = mysql_query("SELECT * FROM Catalog WHERE USEFOR='TYPE_AREA' ORDER BY Sort");
 while($rs = mysql_fetch_array($result)){

@@ -14,7 +14,6 @@
   </head>
 <body>
   <?php
-    include './include/session.php';
     include './include/db_open.php';
     if(!$_SESSION['WELCOME']){
       $result = mysql_query("SELECT * FROM Config WHERE YN = 'Y' AND ID='welcome'");
